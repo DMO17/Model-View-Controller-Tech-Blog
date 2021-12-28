@@ -36,12 +36,37 @@ const logOut = (req, res) => {
   res.send("api controller lo");
 };
 
-const getAllBlogs = (req, res) => {
-  res.send("api controller gab");
+const getAllBlogs = async (req, res) => {
+  try {
+    const data = await Blog.findAll();
+
+    return res.json({ success: true, data });
+  } catch (error) {
+    return res.status(500).json({
+      success: true,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
 };
 
-const getBlogById = (req, res) => {
-  res.send("api controller gabbid");
+const getBlogById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Blog.findByPk(id);
+
+    data
+      ? res.json({ success: true, data })
+      : res.json({
+          success: false,
+          error: `Blog with id of ${id} doest exist`,
+        });
+  } catch (error) {
+    return res.status(500).json({
+      success: true,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
 };
 
 const createBlog = async (req, res) => {
@@ -79,8 +104,37 @@ const deleteBlog = (req, res) => {
   res.send("api controller db");
 };
 
-const getAllComments = (req, res) => {
-  res.send("api controller get comment");
+const getAllComments = async (req, res) => {
+  try {
+    const data = await Comment.findAll();
+
+    return res.json({ success: true, data });
+  } catch (error) {
+    return res.status(500).json({
+      success: true,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
+};
+
+const getCommentById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Comment.findByPk(id);
+
+    data
+      ? res.json({ success: true, data })
+      : res.json({
+          success: false,
+          error: `Comment with id of ${id} doest exist`,
+        });
+  } catch (error) {
+    return res.status(500).json({
+      success: true,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
 };
 
 const createAComment = (req, res) => {
@@ -90,6 +144,7 @@ const createAComment = (req, res) => {
 const updateAComment = (req, res) => {
   res.send("api controller update comment");
 };
+
 const deleteAComment = (req, res) => {
   res.send("api controller delete comment");
 };
