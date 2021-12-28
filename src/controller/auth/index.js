@@ -94,8 +94,24 @@ const updateBlog = (req, res) => {
   res.send("api controller ub");
 };
 
-const deleteBlog = (req, res) => {
-  res.send("api controller db");
+const deleteBlog = async (req, res) => {
+  try {
+    const data = await Blog.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!data) {
+      return res.status(404).json({ message: "No Blog with this id exists" });
+    }
+
+    return res.json({ success: true, data: "Deleted Blog" });
+  } catch (error) {
+    return res.status(500).json({
+      success: true,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
 };
 
 const getAllComments = async (req, res) => {
