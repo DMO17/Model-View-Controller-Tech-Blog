@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const connection = require("../config/connection");
+const { hashedPassword } = require("../hooks");
 
 const schema = {
   id: {
@@ -44,7 +45,7 @@ const options = {
   freezeTableName: true,
   underScored: true,
   moduleName: "user",
-  //hooks: cp
+  hooks: { beforeCreate: hashedPassword },
 };
 
 class User extends Model {}

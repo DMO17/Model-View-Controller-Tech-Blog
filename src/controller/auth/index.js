@@ -1,11 +1,35 @@
-const { application } = require("express");
+const { getPayloadWithValidFieldsOnly } = require("../../helper/util");
+const { User } = require("../../modules");
 
 const login = (req, res) => {
   res.send("api controller li");
 };
 
-const signUp = (req, res) => {
-  res.send("api controller su");
+const signUp = async (req, res) => {
+  try {
+    const validFields = getPayloadWithValidFieldsOnly(
+      ["first_name", "last_name", "username", "email", "password"],
+      req.body
+    );
+
+    console.log(req.body, validFields);
+
+    if (Object.keys(validFields).length != 5) {
+      return res.status(400).json({
+        success: false,
+        error: "Please provide the correct fields to sign up",
+      });
+    }
+
+    const user = await User.create(validFields);
+
+    return res.json({ success: true, data: user });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: `Failed to create user => ${error.message}`,
+    });
+  }
 };
 
 const logOut = (req, res) => {
