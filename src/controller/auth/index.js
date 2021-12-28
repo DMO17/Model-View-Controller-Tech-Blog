@@ -1,5 +1,5 @@
 const { getPayloadWithValidFieldsOnly } = require("../../helper/util");
-const { User } = require("../../modules");
+const { User, Blog } = require("../../modules");
 
 const login = (req, res) => {
   res.send("api controller li");
@@ -44,8 +44,31 @@ const getBlogById = (req, res) => {
   res.send("api controller gabbid");
 };
 
-const createBlog = (req, res) => {
-  res.send("api controller cb");
+const createBlog = async (req, res) => {
+  try {
+    const validFields = getPayloadWithValidFieldsOnly(
+      ["title", "content", "user_id"],
+      req.body
+    );
+
+    console.log(validFields, req.body);
+
+    if (Object.keys(validFields).length != 3) {
+      return res.status(400).json({
+        success: false,
+        error: `please provide the correct body fields `,
+      });
+    }
+
+    const blog = await Blog.create(validFields);
+
+    return res.json({ success: true, data: blog });
+  } catch (error) {
+    return res.json({
+      success: false,
+      error: `Failed to create a blog => ${error.message}`,
+    });
+  }
 };
 
 const updateBlog = (req, res) => {
