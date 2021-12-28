@@ -4,8 +4,8 @@ const publicRoute = require("./publicRoute");
 const privateRoute = require("./private");
 const router = Router();
 
-router.use(publicRoute);
-
 router.use(privateRoute);
+
+router.use(publicRoute);
 
 module.exports = router;
