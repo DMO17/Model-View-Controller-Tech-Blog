@@ -26,9 +26,9 @@ router.post("/blog", createBlog);
 router.put("/blog/:id", updateBlog);
 router.delete("/blog/:id", deleteBlog);
 
-router.get("/comment", getAllComments);
-router.post("/comment", createAComment);
-router.put("/comment/:id", updateAComment);
-router.delete("/comment/:id", deleteAComment);
+router.get("/blog/:id/comment", getAllComments);
+router.post("/blog/:id/comment", createAComment);
+router.put("/blog/:id/comment/:id", updateAComment);
+router.delete("/blog/:id/comment/:id", deleteAComment);
 
 module.exports = router;
