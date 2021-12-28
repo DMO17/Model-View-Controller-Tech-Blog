@@ -1,5 +1,8 @@
-const { getPayloadWithValidFieldsOnly } = require("../../helper/util");
-const { User, Blog } = require("../../modules");
+const {
+  getPayloadWithValidFieldsOnly,
+  checkBlogExists,
+} = require("../../helper/util");
+const { User, Blog, Comment } = require("../../modules");
 
 const login = (req, res) => {
   res.send("api controller li");
@@ -52,15 +55,8 @@ const getAllBlogs = async (req, res) => {
 const getBlogById = async (req, res) => {
   try {
     const { id } = req.params;
-
     const data = await Blog.findByPk(id);
-
-    data
-      ? res.json({ success: true, data })
-      : res.json({
-          success: false,
-          error: `Blog with id of ${id} doest exist`,
-        });
+    checkBlogExists(data, id, res);
   } catch (error) {
     return res.status(500).json({
       success: true,
@@ -75,8 +71,6 @@ const createBlog = async (req, res) => {
       ["title", "content", "user_id"],
       req.body
     );
-
-    console.log(validFields, req.body);
 
     if (Object.keys(validFields).length != 3) {
       return res.status(400).json({
@@ -137,8 +131,39 @@ const getCommentById = async (req, res) => {
   }
 };
 
-const createAComment = (req, res) => {
-  res.send("api controller create comment");
+const createAComment = async (req, res) => {
+  try {
+    // check if blog exists
+    const { id } = req.params;
+    const data = await Blog.findByPk(id);
+    const blog = checkBlogExists(data, id, res);
+
+    // true create a comment
+    if (blog) {
+      const validFields = getPayloadWithValidFieldsOnly(
+        ["comment", "blog_id", "user_id"],
+        req.body
+      );
+
+      // console.log(id);
+
+      if (Object.keys(validFields).length != 3) {
+        return res.status(404).json({
+          success: false,
+          error: `Please provide the correct fields`,
+        });
+      }
+
+      const data = await Comment.create(validFields);
+
+      return res.json({ success: true, data });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
 };
 
 const updateAComment = (req, res) => {

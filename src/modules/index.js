@@ -11,18 +11,21 @@ User.hasMany(Comment, { foreignKey: " user_id" });
 Comment.belongsTo(Blog, { foreignKey: " blog_id" });
 Blog.hasMany(Comment, { foreignKey: " blog_id" });
 
-Blog.belongsToMany(User, {
-  through: {
-    model: Comment,
-    unique: false,
-  },
-});
+Comment.belongsTo(User, { foreignKey: " user_id" });
+User.hasMany(Comment, { foreignKey: " user_id" });
 
-User.belongsToMany(Blog, {
-  through: {
-    model: Comment,
-    unique: false,
-  },
-});
+// Blog.belongsToMany(User, {
+//   through: {
+//     model: Comment,
+//     unique: false,
+//   },
+// });
+
+// User.belongsToMany(Blog, {
+//   through: {
+//     model: Comment,
+//     unique: false,
+//   },
+// });
 
 module.exports = { Blog, Comment, User };
