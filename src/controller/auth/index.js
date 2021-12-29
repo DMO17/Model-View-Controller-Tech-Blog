@@ -90,8 +90,39 @@ const createBlog = async (req, res) => {
   }
 };
 
-const updateBlog = (req, res) => {
-  res.send("api controller ub");
+const updateBlog = async (req, res) => {
+  try {
+    const validFields = getPayloadWithValidFieldsOnly(
+      ["title", "content", "user_id"],
+      req.body
+    );
+
+    if (Object.keys(validFields).length != 3) {
+      return res.status(400).json({
+        success: false,
+        error: `please provide the correct body fields `,
+      });
+    }
+
+    const data = await Blog.update(validFields, {
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    if (!data[0]) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No Blog with this id exists" });
+    }
+
+    return res.json({ success: true, data });
+  } catch (error) {
+    return res.json({
+      success: false,
+      error: `Failed to create a blog => ${error.message}`,
+    });
+  }
 };
 
 const deleteBlog = async (req, res) => {
@@ -119,26 +150,6 @@ const getAllComments = async (req, res) => {
     const data = await Comment.findAll();
 
     return res.json({ success: true, data });
-  } catch (error) {
-    return res.status(500).json({
-      success: true,
-      error: `Failed to retrieve response => ${error.message}`,
-    });
-  }
-};
-
-const getCommentById = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const data = await Comment.findByPk(id);
-
-    data
-      ? res.json({ success: true, data })
-      : res.json({
-          success: false,
-          error: `Comment with id of ${id} doest exist`,
-        });
   } catch (error) {
     return res.status(500).json({
       success: true,
@@ -186,8 +197,38 @@ const updateAComment = (req, res) => {
   res.send("api controller update comment");
 };
 
-const deleteAComment = (req, res) => {
-  res.send("api controller delete comment");
+const deleteAComment = async (req, res) => {
+  // check if blog exists
+  const { id } = req.params;
+  const data = await Blog.findByPk(id);
+  const blog = checkBlogExists(data, id, res);
+
+  // true create a comment
+  if (blog) {
+    console.log(id);
+  }
+
+  return res.send("yess");
+};
+
+const getCommentById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Comment.findByPk(id);
+
+    data
+      ? res.json({ success: true, data })
+      : res.json({
+          success: false,
+          error: `Comment with id of ${id} doest exist`,
+        });
+  } catch (error) {
+    return res.status(500).json({
+      success: true,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
 };
 
 module.exports = {
