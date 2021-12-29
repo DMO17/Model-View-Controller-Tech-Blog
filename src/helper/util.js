@@ -14,4 +14,17 @@ const checkBlogExists = (data, id, res) => {
       });
 };
 
-module.exports = { getPayloadWithValidFieldsOnly, checkBlogExists };
+const checkValidFields = (validFields, res, num) => {
+  if ((Object.keys(validFields).length = !num)) {
+    return res.status(400).json({
+      success: false,
+      error: "Please provide the correct fields to sign up",
+    });
+  }
+};
+
+module.exports = {
+  getPayloadWithValidFieldsOnly,
+  checkBlogExists,
+  checkValidFields,
+};

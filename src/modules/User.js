@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const connection = require("../config/connection");
 const { hashedPassword } = require("../hooks");
+const bcrypt = require("bcrypt");
 
 const schema = {
   id: {
@@ -48,7 +49,12 @@ const options = {
   hooks: { beforeCreate: hashedPassword },
 };
 
-class User extends Model {}
+class User extends Model {
+  async validatePassword(password) {
+    const isValid = await bcrypt.compare(password, this.password);
+    return isValid;
+  }
+}
 
 User.init(schema, options);
 
