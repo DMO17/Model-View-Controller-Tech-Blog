@@ -14,6 +14,6 @@ router.use("/sign-up", renderSignUpPage);
 
 router.use("/blog/:id", renderBlog);
 
-router.use("/", renderHomePage);
+router.use("/home", renderHomePage);
 
 module.exports = router;
