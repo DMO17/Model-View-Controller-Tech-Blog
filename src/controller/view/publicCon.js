@@ -8,4 +8,13 @@ const renderSignUpPage = (req, res) => {
   res.render("signup");
 };
 
-module.exports = { renderHomePage, renderLoginPage, renderSignUpPage };
+const renderBlog = (req, res) => {
+  res.render("blog");
+};
+
+module.exports = {
+  renderHomePage,
+  renderLoginPage,
+  renderSignUpPage,
+  renderBlog,
+};

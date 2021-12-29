@@ -2,7 +2,8 @@
 const express = require("express");
 const expressHandleBars = require("express-handlebars");
 const path = require("path");
-
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 // global imports
 const connection = require("./config/connection");
 const routes = require("./routes");
@@ -12,6 +13,22 @@ const app = express();
 
 //static middleware
 app.use(express.static(path.join(__dirname, "../public")));
+
+// set session db
+const sessionOptions = {
+  secret: "Super secret secret", // env,
+  cookie: {
+    // Stored in milliseconds (86400 === 1 day)
+    maxAge: 86400000,
+  },
+  resave: false,
+  saveUninitialized: false,
+  store: new SequelizeStore({
+    db: connection,
+  }),
+};
+
+app.use(session(sessionOptions));
 
 // set up handlebars
 const hbs = expressHandleBars.create({});
