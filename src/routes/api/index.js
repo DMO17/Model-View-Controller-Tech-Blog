@@ -18,14 +18,14 @@ const {
 const router = Router();
 
 router.get("/blog", getAllBlogs);
-router.get("/blog?blogId", getBlogById);
+router.get("/blog/:uuid", getBlogById);
 router.post("/blog", createBlog);
-router.put("/blog?blogId", updateBlog);
-router.delete("/blog?blogId", deleteBlog);
+router.put("/blog/:uuid", updateBlog);
+router.delete("/blog/:uuid", deleteBlog);
 
-router.get("/blog/:id/comment", getAllComments);
-router.post("/blog/:id/comment", createAComment);
-router.put("/blog/:id/comment/:id", updateAComment);
-router.delete("/blog/:id/comment/:id", deleteAComment);
+router.get("/blog/:uuid/comment", getAllComments);
+router.post("/blog/:uuid/comment", createAComment);
+router.put("/blog/:uuid/comment/:id", updateAComment);
+router.delete("/blog/:uuid/comment/:id", deleteAComment);
 
 module.exports = router;

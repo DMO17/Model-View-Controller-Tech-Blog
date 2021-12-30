@@ -21,13 +21,13 @@ const getAllBlogs = async (req, res) => {
 
 const getBlogById = async (req, res) => {
   try {
-    const { blogId } = req.query;
+    const { uuid } = req.params;
     const data = await Blog.findOne({
       where: {
-        blog_uuid: blogId,
+        blog_uuid: uuid,
       },
     });
-    checkBlogExists(data, id, res);
+    checkBlogExists(data, uuid, res);
   } catch (error) {
     return res.status(500).json({
       success: true,
@@ -63,7 +63,7 @@ const createBlog = async (req, res) => {
 
 const updateBlog = async (req, res) => {
   try {
-    const { blogId } = req.query;
+    const { uuid } = req.params;
 
     const validFields = getPayloadWithValidFieldsOnly(
       ["title", "content", "user_id"],
@@ -79,7 +79,7 @@ const updateBlog = async (req, res) => {
 
     const data = await Blog.update(validFields, {
       where: {
-        blog_uuid: blogId,
+        blog_uuid: uuid,
       },
     });
 
@@ -100,11 +100,11 @@ const updateBlog = async (req, res) => {
 
 const deleteBlog = async (req, res) => {
   try {
-    const { blogId } = req.query;
+    const { uuid } = req.params;
 
     const data = await Blog.destroy({
       where: {
-        blog_uuid: blogId,
+        blog_uuid: uuid,
       },
     });
     if (!data) {

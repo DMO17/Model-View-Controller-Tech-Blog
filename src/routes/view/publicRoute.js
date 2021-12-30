@@ -10,7 +10,7 @@ const router = Router();
 
 router.use("/sign-up", renderSignUpPage);
 
-router.use("/blog/view?blog=", renderBlog);
+router.use("/blog?blogId=", renderBlog);
 
 router.use("/home", renderHomePage);
 
