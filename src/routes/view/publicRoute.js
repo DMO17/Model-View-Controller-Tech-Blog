@@ -8,12 +8,12 @@ const {
 
 const router = Router();
 
-router.use("/login", renderLoginPage);
-
 router.use("/sign-up", renderSignUpPage);
 
-router.use("/blog/:id", renderBlog);
+router.use("/blog/view?blog=", renderBlog);
 
 router.use("/home", renderHomePage);
+
+router.use("/login", renderLoginPage);
 
 module.exports = router;
