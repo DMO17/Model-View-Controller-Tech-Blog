@@ -1,4 +1,4 @@
-const { Comment } = require("../../modules");
+const { Comment, Blog } = require("../../modules");
 
 const {
   getPayloadWithValidFieldsOnly,
@@ -24,20 +24,31 @@ const getAllComments = async (req, res) => {
 const createAComment = async (req, res) => {
   try {
     // check if blog exists
-    const { id } = req.params;
-    const data = await Blog.findByPk(id);
-    const blog = checkBlogExists(data, id, res);
+    const { id, uuid } = req.params;
+
+    const data = await Blog.findOne({
+      where: {
+        blog_uuid: uuid,
+      },
+    });
+
+    const blog = checkBlogExists(data, uuid, res);
 
     // true create a comment
     if (blog) {
       const validFields = getPayloadWithValidFieldsOnly(
-        ["comment", "blog_id", "user_id"],
+        ["comment", "user_id"],
         req.body
       );
 
-      // console.log(id);
+      const allValidFields = {
+        blog_id: uuid,
+        ...validFields,
+      };
 
-      if (Object.keys(validFields).length != 3) {
+      console.log(allValidFields);
+
+      if (Object.keys(allValidFields).length != 2) {
         return res.status(404).json({
           success: false,
           error: `Please provide the correct fields`,
@@ -56,22 +67,78 @@ const createAComment = async (req, res) => {
   }
 };
 
-const updateAComment = (req, res) => {
-  res.send("api controller update comment");
+const updateAComment = async (req, res) => {
+  try {
+    // check if blog exists
+    const { id, uuid } = req.params;
+
+    const data = await Blog.findOne({
+      where: {
+        blog_uuid: uuid,
+      },
+    });
+
+    const blog = checkBlogExists(data, uuid, res);
+
+    // true create a comment
+    if (blog) {
+      const validFields = getPayloadWithValidFieldsOnly(
+        ["comment", "user_id"],
+        req.body
+      );
+
+      if (Object.keys(validFields).length != 2) {
+        return res.status(404).json({
+          success: false,
+          error: `Please provide the correct fields`,
+        });
+      }
+
+      const data = await Comment.update(validFields, {
+        where: {
+          blog_uuid: uuid,
+        },
+      });
+
+      return res.json({ success: true, data });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
 };
 
 const deleteAComment = async (req, res) => {
-  // check if blog exists
-  const { id } = req.params;
-  const data = await Blog.findByPk(id);
-  const blog = checkBlogExists(data, id, res);
+  try {
+    // check if blog exists
+    const { id, uuid } = req.params;
+    const data = await Blog.findOne({ where: { blog_uuid: uuid } });
+    const blog = checkBlogExists(data, uuid, res);
 
-  // true create a comment
-  if (blog) {
-    console.log(id);
+    // true create a comment
+    if (blog) {
+      const data = await Comment.destroy({
+        where: {
+          comment: id,
+        },
+      });
+      if (!data) {
+        return res.status(404).json({ message: "No Blog with this id exists" });
+      }
+
+      return res.json({
+        success: true,
+        data: `Deleted your comment from blog with id ${uuid}`,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: `Failed to retrieve response => ${error.message}`,
+    });
   }
-
-  return res.send("yess");
 };
 
 const getCommentById = async (req, res) => {
