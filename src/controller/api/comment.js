@@ -1,4 +1,4 @@
-const { Comment, Blog } = require("../../modules");
+const { Comment, Blog } = require("../../models");
 
 const {
   getPayloadWithValidFieldsOnly,

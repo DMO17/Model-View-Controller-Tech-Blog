@@ -3,7 +3,7 @@ const {
   checkBlogExists,
   checkValidFields,
 } = require("../../helper/util");
-const { User, Blog, Comment } = require("../../modules");
+const { User, Blog, Comment } = require("../../models");
 
 const login = async (req, res) => {
   const validFields = getPayloadWithValidFieldsOnly(

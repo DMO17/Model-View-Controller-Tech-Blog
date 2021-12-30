@@ -6,10 +6,8 @@ const view = require("./view");
 
 const router = Router();
 
-router.use("/", view);
-
-router.use("/api", api);
-
 router.use("/auth", auth);
+router.use("/api", api);
+router.use("/", view);
 
 module.exports = router;

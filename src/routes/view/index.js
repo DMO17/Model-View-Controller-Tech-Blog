@@ -7,8 +7,8 @@ const router = Router();
 
 router.use(publicRoute);
 
-// router.use(authentication, privateRoute);
+router.use(authentication, privateRoute);
 
-router.use(privateRoute);
+// router.use(privateRoute);
 
 module.exports = router;
