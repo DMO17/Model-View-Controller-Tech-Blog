@@ -9,7 +9,7 @@ const schema = {
     autoIncrement: true,
   },
   comment: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   blog_id: {

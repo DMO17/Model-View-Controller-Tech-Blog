@@ -19,7 +19,7 @@ const connection = new Sequelize(
   // User
   "root",
   // Password
-  "password",
+  "Password123!!",
   {
     // Database location
     host: "localhost",
