@@ -9,7 +9,8 @@ body {
   font-family: "lato", sans-serif;
 }
 
-.sign-up-form {
+.sign-up-form,
+.log-in-form {
   display: flex;
   justify-content: center;
   align-items: center;

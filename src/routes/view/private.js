@@ -7,6 +7,7 @@ const {
 const router = Router();
 
 router.use("/dashboard", renderDashboard);
+
 router.use("/blog/create", renderBlogForm);
 
 module.exports = router;

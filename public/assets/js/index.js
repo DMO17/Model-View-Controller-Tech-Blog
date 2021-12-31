@@ -1,4 +1,5 @@
 const signupForm = $(".sign-up-form");
+const loginForm = $(".log-in-form");
 
 const handleSignUp = async (event) => {
   event.preventDefault();
@@ -9,8 +10,6 @@ const handleSignUp = async (event) => {
   const username = $("#username").val();
   const password = $("#password").val();
   const confirmPassword = $("#confirm-password").val();
-
-  console.log(password, confirmPassword);
 
   if (password === confirmPassword && password.length > 8) {
     const response = await fetch("/auth/signup", {
@@ -55,4 +54,40 @@ const handleSignUp = async (event) => {
   }
 };
 
+const handleLogin = async (event) => {
+  event.preventDefault();
+
+  const username = $("#username").val();
+  const password = $("#password").val();
+
+  console.log(username, password);
+
+  const response = await fetch("/auth/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+
+      password,
+    }),
+    redirect: "follow",
+  });
+
+  const data = await response.json();
+
+  if (data.success) {
+    window.location.replace("/dashboard");
+  } else {
+    const warning = `<div class="alert alert-success" role="alert">
+      Username or password is incorrect
+    </div>`;
+
+    return loginForm.append(warning);
+  }
+};
+
+loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
