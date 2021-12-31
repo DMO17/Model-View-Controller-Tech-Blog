@@ -36,7 +36,7 @@ const options = {
   timestamps: true,
   freezeTableName: true,
   underScored: true,
-  moduleName: "blog",
+  modelName: "blog",
 };
 
 class Blog extends Model {}

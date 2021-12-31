@@ -45,7 +45,7 @@ const options = {
   timestamps: true,
   freezeTableName: true,
   underScored: true,
-  moduleName: "user",
+  modelName: "user",
   hooks: { beforeCreate: hashedPassword },
 };
 

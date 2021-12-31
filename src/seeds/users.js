@@ -7,7 +7,6 @@ const userData = [
     username: "qb-packers12",
     email: "aaron12@gmail.com",
     password: "password123",
-    // phone_num: 12345678910,
   },
   {
     first_name: "Patrick",
