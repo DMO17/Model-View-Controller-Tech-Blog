@@ -17,8 +17,8 @@ const {
 
 const router = Router();
 
-router.get("/blog", getAllBlogs);
-router.get("/blog/:uuid", getBlogById);
+// router.get("/blog", getAllBlogs);
+// router.get("/blog/:uuid", getBlogById);
 router.post("/blog", createBlog);
 router.put("/blog/:uuid", updateBlog);
 router.delete("/blog/:uuid", deleteBlog);

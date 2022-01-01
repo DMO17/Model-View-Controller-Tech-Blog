@@ -3,7 +3,6 @@
 </header>
 
 
-
 <h1>HOME</h1>
 
 <div class="container grid">
@@ -25,8 +24,8 @@
           Nulla vel .
         </p>
       </div>
+      <div class="font-italic text-end h5"><u>Italic text.</u></div>
     </div>
-    <div class="font-italic text-end h5"><u>Italic text.</u></div>
   </div>
 
   <div class="item project blog-card">
@@ -47,18 +46,27 @@
     </div>
   </div>
 
-</div>
+{{#each data}}
 
+   <div class="item project blog-card">
+    <div class="content">
+      <div class="desc">
+        <div class="title mb-1">{{title}}</div>
 
+        <img src="https://assets.codepen.io/881020/dog3.jpg" />
 
-<ul >
-  {{#each data}}
-  <li>{{title}}</li>
+        <p>
+        {{content}}
+        <a href="/blog/view/{{blog_uuid}}"> view</a>
+        </p>
+      </div>
+      <div class="font-italic text-end h5"><u>{{username}}</u></div>
+    </div>
+  </div>
   {{/each}}
-</ul>
 
 
-
+</div>
 
 <script>
   function resizeGridItem(item) { grid =
@@ -76,5 +84,6 @@
   (x = 0; x < allItems.length; x++) { imagesLoaded(allItems[x], resizeInstance);
   }
 
-  
 </script>
+
+
