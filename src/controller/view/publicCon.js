@@ -1,6 +1,17 @@
-const renderHomePage = (req, res) => {
-  res.render("home");
+const { Blog } = require("../../models");
+
+const renderHomePage = async (req, res) => {
+  const blogData = await Blog.findAll();
+
+  const data = blogData.get({ plain: true });
+
+  res.render("home", { data });
+
+  console.log("data over here", data);
+
+  // return res.render("home");
 };
+
 const renderLoginPage = (req, res) => {
   res.render("login");
 };
