@@ -1,6 +1,66 @@
-<header>
+{{!-- <header>
   {{> public-navbar}}
 </header>
-
+ --}}
 
 <h1>HOME</h1>
+
+<div class="container grid">
+
+  <div class="item photo blog-card">
+    <div class="content">
+      <img class="photothumb" src="https://assets.codepen.io/881020/dog1.jpg" />
+
+      <div class="title mb-1">Lorum</div>
+
+      <div class="desc">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+          facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur,
+          vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit. Sed dictum non orci ut
+          dignissim. Fusce fermentum felis aliquam, mattis nibh ut, faucibus
+          leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque.
+          Nulla vel .
+        </p>
+      </div>
+    </div>
+    <div class="font-italic text-end h5"><u>Italic text.</u></div>
+  </div>
+
+  <div class="item project blog-card">
+    <div class="content">
+      <div class="desc">
+        <div class="title mb-1">Lorum</div>
+
+        <img src="https://assets.codepen.io/881020/dog3.jpg" />
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+          facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur,
+          vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum
+          auctor.
+        </p>
+      </div>
+      <div class="font-italic text-end h5"><u>Italic text.</u></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function resizeGridItem(item) { grid =
+  document.getElementsByClassName("grid")[0]; rowHeight = parseInt(
+  window.getComputedStyle(grid).getPropertyValue("grid-auto-rows") ); rowGap =
+  parseInt( window.getComputedStyle(grid).getPropertyValue("grid-row-gap") );
+  rowSpan = Math.ceil(
+  (item.querySelector(".content").getBoundingClientRect().height + rowGap) /
+  (rowHeight + rowGap) ); item.style.gridRowEnd = "span " + rowSpan; } function
+  resizeAllGridItems() { allItems = document.getElementsByClassName("item"); for
+  (x = 0; x < allItems.length; x++) { resizeGridItem(allItems[x]); } } function
+  resizeInstance(instance) { item = instance.elements[0]; resizeGridItem(item);
+  } window.onload = resizeAllGridItems(); window.addEventListener("resize",
+  resizeAllGridItems); allItems = document.getElementsByClassName("item"); for
+  (x = 0; x < allItems.length; x++) { imagesLoaded(allItems[x], resizeInstance);
+  }
+</script>
