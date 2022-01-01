@@ -3,7 +3,7 @@ const { Blog } = require("../../models");
 const renderHomePage = async (req, res) => {
   const blogData = await Blog.findAll();
 
-  const data = blogData.get({ plain: true });
+  const data = blogData.map((each) => each.get({ plain: true }));
 
   res.render("home", { data });
 
