@@ -1,17 +1,23 @@
 const { checkBlogExists } = require("../../helper/util");
-const { Blog } = require("../../models");
+const { Blog, User } = require("../../models");
 
 const renderLoginPage = (req, res) => {
   res.render("login");
 };
+
 const renderSignUpPage = (req, res) => {
   res.render("signup");
 };
 
 const renderHomePage = async (req, res) => {
-  const blogData = await Blog.findAll();
+  const data = await Blog.findAll({
+    include: [{ model: User }],
+    raw: true,
+  });
 
-  const data = blogData.map((each) => each.get({ plain: true }));
+  console.log(data);
+
+  // const data = blogData.map((each) => each.get({ plain: true }));
 
   res.render("home", { data });
 };
@@ -19,19 +25,21 @@ const renderHomePage = async (req, res) => {
 const renderBlog = async (req, res) => {
   const { blogId } = req.params;
 
-  const blogData = await Blog.findOne({
-    where: {
-      blog_uuid: blogId,
-    },
+  const blogData = await Blog.findByPk(blogId, {
+    include: [{ model: User, as: "user" }],
+    raw: true,
   });
 
-  const data = blogData.get({ plain: true });
+  console.log(blogData);
 
-  if (!data) {
+  // const data = blogData.get({ plain: true });
+
+  if (!blogData) {
     return res.render("no-blog");
   }
 
-  res.render("blog", data.data);
+  res.render("blog", blogData);
+  // res.render("blog");
 };
 
 module.exports = {

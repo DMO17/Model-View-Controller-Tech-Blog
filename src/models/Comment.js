@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes, UUID } = require("sequelize");
 const connection = require("../config/connection");
 
 const schema = {
@@ -13,10 +13,10 @@ const schema = {
     allowNull: false,
   },
   blog_id: {
-    type: DataTypes.INTEGER,
+    type: UUID,
     references: {
       model: "blog",
-      key: "id",
+      key: "blog_uuid",
     },
   },
   user_id: {

@@ -5,7 +5,7 @@
 
 <h1>HOME</h1>
 
-<div class="container grid">
+ <div class="container grid">
 
   <div class="item photo blog-card">
     <div class="content">
@@ -48,6 +48,7 @@
 
 {{#each data}}
 
+{{#index id}}
    <div class="item project blog-card">
     <div class="content">
       <div class="desc">
@@ -56,17 +57,65 @@
         <img src="https://assets.codepen.io/881020/dog3.jpg" />
 
         <p>
-        {{content}}
+        {{content}} 
         <a href="/blog/view/{{blog_uuid}}"> view</a>
         </p>
       </div>
       <div class="font-italic text-end h5"><u>{{username}}</u></div>
     </div>
   </div>
-  {{/each}}
+
+{{else}} 
+ <div class="item photo blog-card">
+    <div class="content">
+      <img class="photothumb" src="https://assets.codepen.io/881020/dog1.jpg" />
+
+      <div class="title mb-1">{{title}}</div>
+
+      <div class="desc">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
+          facilisis fringilla laoreet. Mauris mattis enim ut felis consectetur,
+          vitae lacinia enim auctor. Aenean vitae fermentum odio. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit. Sed dictum non orci ut
+          dignissim. Fusce fermentum felis aliquam, mattis nibh ut, faucibus
+          leo. Sed lectus libero, volutpat at eros quis, venenatis tempus neque.
+          Nulla vel . <a href="/blog/view/{{blog_uuid}}"> view</a>
+        </p>
+      </div>
+      <div class="font-italic text-end h5"><u>Italic text.</u></div>
+    </div>
+  </div> 
+
+ {{/index}}
 
 
-</div>
+{{/each}}
+
+</div> 
+
+
+
+{{!-- {{#each data}}
+
+{{#index id}}
+  <img src="star.gif" alt="Active">
+
+ {{else}}
+  <img src="cry.gif" alt="Inactive">
+
+{{/index}} 
+
+
+{{/each}} --}}
+
+
+
+
+
+
+
+
 
 <script>
   function resizeGridItem(item) { grid =
@@ -85,5 +134,4 @@
   }
 
 </script>
-
 

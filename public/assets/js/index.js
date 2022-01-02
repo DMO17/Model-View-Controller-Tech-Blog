@@ -89,5 +89,11 @@ const handleLogin = async (event) => {
   }
 };
 
+// Handlebars.registerHelper("index", function (conditional, options) {
+//   if (conditional) {
+//     return options.fn(this);
+//   }
+// });
+
 loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
