@@ -25,7 +25,13 @@ const renderHomePage = async (req, res) => {
 const renderBlog = async (req, res) => {
   const { blogId } = req.params;
 
-  const blogData = await Blog.findByPk(blogId, {
+  // const blogData = await Blog.findByPk(blogId, {
+  //   include: [{ model: User, as: "user" }],
+  //   raw: true,
+  // });
+
+  const blogData = await Blog.findOne({
+    where: { blog_uuid: blogId },
     include: [{ model: User, as: "user" }],
     raw: true,
   });

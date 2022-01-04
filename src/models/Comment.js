@@ -13,10 +13,10 @@ const schema = {
     allowNull: false,
   },
   blog_id: {
-    type: UUID,
+    type: DataTypes.INTEGER,
     references: {
       model: "blog",
-      key: "blog_uuid",
+      key: "id",
     },
   },
   user_id: {

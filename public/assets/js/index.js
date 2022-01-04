@@ -11,6 +11,8 @@ const handleSignUp = async (event) => {
   const password = $("#password").val();
   const confirmPassword = $("#confirm-password").val();
 
+  console.log(password, confirmPassword);
+
   if (password === confirmPassword && password.length > 8) {
     const response = await fetch("/auth/signup", {
       method: "POST",
