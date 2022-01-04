@@ -1,9 +1,11 @@
 const renderDashboard = (req, res) => {
-  res.render("dashboard");
+  const { loggedIn } = req.session;
+  res.render("dashboard", { loggedIn });
 };
 
 const renderBlogForm = (req, res) => {
-  res.render("blog-form");
+  const { loggedIn } = req.session;
+  res.render("blog-form", { loggedIn });
 };
 
 module.exports = { renderDashboard, renderBlogForm };

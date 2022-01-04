@@ -10,6 +10,7 @@ const renderSignUpPage = (req, res) => {
 };
 
 const renderHomePage = async (req, res) => {
+  const { loggedIn } = req.session;
   const data = await Blog.findAll({
     include: [{ model: User }],
     raw: true,
@@ -19,10 +20,12 @@ const renderHomePage = async (req, res) => {
 
   // const data = blogData.map((each) => each.get({ plain: true }));
 
-  res.render("home", { data });
+  res.render("home", { data, loggedIn });
 };
 
 const renderBlog = async (req, res) => {
+  const { loggedIn } = req.session;
+
   const { blogId } = req.params;
 
   // const blogData = await Blog.findByPk(blogId, {
@@ -44,7 +47,9 @@ const renderBlog = async (req, res) => {
     return res.render("no-blog");
   }
 
-  res.render("blog", blogData);
+  const data = { loggedIn, ...blogData };
+
+  res.render("blog", data);
   // res.render("blog");
 };
 

@@ -1,3 +1,12 @@
+<header>
+  {{#if loggedIn}}
+  {{> private-navbar}}
+  {{else}}
+  {{> public-navbar}}
+  {{/if}}
+</header>
+
+
 <h1>BLOG</h1>
 
 <li>
