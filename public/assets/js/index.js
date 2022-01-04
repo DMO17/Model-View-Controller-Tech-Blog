@@ -1,5 +1,6 @@
 const signupForm = $(".sign-up-form");
 const loginForm = $(".log-in-form");
+const createBlog = $(".create-blog");
 
 const handleSignUp = async (event) => {
   event.preventDefault();
@@ -91,11 +92,16 @@ const handleLogin = async (event) => {
   }
 };
 
-// Handlebars.registerHelper("index", function (conditional, options) {
-//   if (conditional) {
-//     return options.fn(this);
-//   }
-// });
+const handleBlogPost = (event) => {
+  event.preventDefault();
+
+  const blogTitle = $("#blog-title").val();
+  const blogImage = $("#blog-img").val();
+  const blogContent = $("#blog-content").val();
+
+  console.log(blogTitle, blogImage, blogContent);
+};
 
 loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
+createBlog.on("submit", handleBlogPost);
