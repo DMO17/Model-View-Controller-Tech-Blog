@@ -1,20 +1,29 @@
-<h1>BLOG FORM</h1>
-
-
 <header>
   {{> private-navbar}}
 </header>
 
+<h1>BLOG FORM</h1>
 
 <div class="container">
   <div class="container banner mt-4">
     <h3 class="text-center">Post Your Blog</h3>
   </div>
   <form action="" class="mt-4">
+
+    <div class="inputContainer">
+      <input id="blog-title" type="text" class="input" placeholder="a" />
+      <label for="" class="label">Blog Title</label>
+    </div>
+
+    <div class="inputContainer">
+      <input id="blog-img" type="text" class="input" placeholder="a" />
+      <label for="" class="label">Blog Image URL</label>
+    </div>
+
     <div class="inputContainer">
       <textarea
         cols="30"
-        rows="10"
+        rows="50"
         type="text"
         class="input"
         id="blog-input"
