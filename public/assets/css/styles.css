@@ -144,3 +144,30 @@ body {
   transform: scale(1.1);
   z-index: 2;
 }
+
+/* dashboard */
+.parent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.blog-container {
+  flex: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.comment-container {
+  flex: 30%;
+  width: 200px;
+  padding: 5px;
+  background-color: violet;
+}
+
+.comment-container .card-body {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
