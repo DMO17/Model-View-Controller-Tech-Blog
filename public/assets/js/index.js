@@ -92,16 +92,36 @@ const handleLogin = async (event) => {
   }
 };
 
-const handleBlogPost = (event) => {
+const handleCreateBlogPost = async (event) => {
   event.preventDefault();
 
-  const blogTitle = $("#blog-title").val();
-  const blogImage = $("#blog-img").val();
-  const blogContent = $("#blog-content").val();
+  const title = $("#blog-title").val();
+  const blog_img = $("#blog-img").val();
+  const content = $("#blog-content").val();
 
-  console.log(blogTitle, blogImage, blogContent);
+  console.log(title, `${blog_img}`, content);
+  const response = await fetch("/api/blog", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title,
+      blog_img,
+      content,
+      user_id: 4,
+    }),
+    redirect: "follow",
+  });
+
+  const data = await response.json();
+
+  if (data.success) {
+    window.location.replace("/dashboard");
+  }
 };
 
 loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
-createBlog.on("submit", handleBlogPost);
+createBlog.on("submit", handleCreateBlogPost);

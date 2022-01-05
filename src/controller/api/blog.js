@@ -39,7 +39,7 @@ const getBlogById = async (req, res) => {
 const createBlog = async (req, res) => {
   try {
     const validFields = getPayloadWithValidFieldsOnly(
-      ["title", "content", "user_id"],
+      ["title", "content", "blog_img"],
       req.body
     );
 
@@ -50,7 +50,12 @@ const createBlog = async (req, res) => {
       });
     }
 
-    const blog = await Blog.create(validFields);
+    const allValidFields = {
+      user_id: req.session.user.id,
+      ...validFields,
+    };
+
+    const blog = await Blog.create(allValidFields);
 
     return res.json({ success: true, data: blog });
   } catch (error) {

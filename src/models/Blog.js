@@ -22,6 +22,12 @@ const schema = {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  blog_img: {
+    type: DataTypes.STRING,
+    defaultValue:
+      "https://c0.wallpaperflare.com/preview/304/131/640/beverage-blog-blogger-browsing.jpg",
+    allowNull: false,
+  },
   user_id: {
     type: DataTypes.INTEGER,
     references: {
