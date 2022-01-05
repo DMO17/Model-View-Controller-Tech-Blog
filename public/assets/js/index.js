@@ -141,13 +141,17 @@ const handleCreateBlogPost = async (event) => {
 const handleEditBlogPost = async (event) => {
   event.preventDefault();
 
+  // window.location.pathname.split('/')[3]
+
+  const { id } = event.target;
+
   const title = $("#edit-title").val();
   const blog_img = $("#edit-img").val();
   const content = $("#edit-content").val();
 
   console.log(title, blog_img, content);
 
-  const response = await fetch("/api/blog", {
+  const response = await fetch(`/api/blog/${id}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",

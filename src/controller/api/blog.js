@@ -1,4 +1,4 @@
-const { Blog } = require("../../models");
+const { Blog, User } = require("../../models");
 
 const {
   getPayloadWithValidFieldsOnly,
@@ -68,7 +68,9 @@ const createBlog = async (req, res) => {
 
 const updateBlog = async (req, res) => {
   try {
-    const { blogId } = req.params;
+    const { uuid } = req.params;
+
+    console.log(uuid);
 
     const validFields = getPayloadWithValidFieldsOnly(
       ["title", "content", "blog_img"],
@@ -88,8 +90,7 @@ const updateBlog = async (req, res) => {
     };
 
     const data = await Blog.update(allValidFields, {
-      where: { blog_uuid: blogId },
-      include: [{ model: User, as: "user" }],
+      where: { blog_uuid: uuid },
       raw: true,
     });
 

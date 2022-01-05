@@ -3,15 +3,16 @@ const { Blog, User } = require("../../models");
 const renderDashboard = async (req, res) => {
   const { loggedIn } = req.session;
 
-  const userBlogData = await Blog.findOne({
+  const blogs = await Blog.findAll({
     where: { user_id: req.session.user.id },
     include: [{ model: User, as: "user" }],
-    raw: true,
+    // raw: true,
   });
 
-  console.log(userBlogData);
-
-  const data = { loggedIn, ...userBlogData };
+  const data = {
+    loggedIn,
+    blogs: blogs.map((blog) => blog.get({ plain: true })),
+  };
 
   console.log(data);
 

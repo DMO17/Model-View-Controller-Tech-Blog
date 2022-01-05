@@ -5,37 +5,36 @@
 
 <h1>edit blog</h1>
 
-<ul>
-  <li>{{title}}</li>
-  <li>{{blog_img}}</li>
-  <li>{{content}}</li>
-</ul>
+
 
 <div class="container edit-blog">
   <div class="container banner mt-4">
     <h3 class="text-center">Edit Your Blog</h3>
   </div>
-  <form action="" class="mt-4">
+  <form action="" class="mt-4" id = '{{blog_uuid}}'>
 
     <div class="inputContainer">
-      <input id="edit-title" type="text" class="input" placeholder="a" />
+      <input id="edit-title" type="text" class="input" placeholder="a" value = '{{title}}' />
       <label for="" class="label">Blog Title</label>
     </div>
 
     <div class="inputContainer">
-      <input id="edit-img" type="text" class="input" placeholder="a" />
+      <input id="edit-img" type="text" class="input" placeholder="a"  value = '{{blog_img}}' />
       <label for="" class="label">Blog Image URL</label>
     </div>
 
     <div class="inputContainer">
       <textarea
-        cols="30"
-        rows="50"
+        cols="50"
+        rows="70"
         type="text"
         class="input"
         id="edit-content"
         placeholder="a"
-      ></textarea>
+
+      > 
+       {{content}}
+      </textarea>
       <label for="edit-content" class="label">Write your blog</label>
     </div>
     <input type="submit" class="submitBtn" value="Post" />

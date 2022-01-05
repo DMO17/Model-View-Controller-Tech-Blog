@@ -31,6 +31,8 @@ const renderBlog = async (req, res) => {
   try {
     const { loggedIn } = req.session;
 
+    const username = req.session.user.username;
+
     const { blogId } = req.params;
 
     // const blogData = await Blog.findByPk(blogId, {
