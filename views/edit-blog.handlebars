@@ -1,8 +1,19 @@
+
+<header>
+  {{> private-navbar}}
+</header>
+
 <h1>edit blog</h1>
+
+<ul>
+  <li>{{title}}</li>
+  <li>{{blog_img}}</li>
+  <li>{{content}}</li>
+</ul>
 
 <div class="container edit-blog">
   <div class="container banner mt-4">
-    <h3 class="text-center">Post Your Blog</h3>
+    <h3 class="text-center">Edit Your Blog</h3>
   </div>
   <form action="" class="mt-4">
 
@@ -22,7 +33,7 @@
         rows="50"
         type="text"
         class="input"
-        id="blog-content"
+        id="edit-content"
         placeholder="a"
       ></textarea>
       <label for="edit-content" class="label">Write your blog</label>
@@ -31,8 +42,3 @@
   </form>
 </div>
 
-<ul>
-  <li>{{title}</li>
-  <li>{{blog_img}}</li>
-  <li>{{content}}</li>
-</ul>

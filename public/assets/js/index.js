@@ -145,7 +145,8 @@ const handleEditBlogPost = async (event) => {
   const blog_img = $("#edit-img").val();
   const content = $("#edit-content").val();
 
-  console.log(title, `${blog_img}`, content);
+  console.log(title, blog_img, content);
+
   const response = await fetch("/api/blog", {
     method: "PUT",
     headers: {
