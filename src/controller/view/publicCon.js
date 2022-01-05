@@ -50,7 +50,6 @@ const renderBlog = async (req, res) => {
   const data = { loggedIn, ...blogData };
 
   res.render("blog", data);
-  // res.render("blog");
 };
 
 module.exports = {

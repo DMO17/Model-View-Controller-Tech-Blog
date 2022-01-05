@@ -84,16 +84,15 @@ const signUp = async (req, res) => {
 
 const logOut = (req, res) => {
   if (req.session.loggedIn) {
-    req.session.destroy(() => ({
-      success: true,
-      data: "Successfully logged out",
-    }));
+    req.session.destroy(() => {
+      return res.json({ success: true, data: "Successfully logged out" });
+    });
+  } else {
+    return res.status(404).json({
+      success: false,
+      error: "Cannot logout when you are not logged in",
+    });
   }
-
-  return res.status(404).json({
-    success: false,
-    error: "Cannot logout when you are not logged in",
-  });
 };
 
 module.exports = {

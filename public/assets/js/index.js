@@ -1,5 +1,6 @@
 const signupForm = $(".sign-up-form");
 const loginForm = $(".log-in-form");
+const logOutBtn = $("#logout-btn");
 const createBlog = $(".create-blog");
 
 const handleSignUp = async (event) => {
@@ -122,6 +123,22 @@ const handleCreateBlogPost = async (event) => {
   }
 };
 
+const handleLogout = async () => {
+  const response = await fetch("/auth/logout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+
+  if (data.success) {
+    window.location.replace("/login");
+  }
+};
+
 loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
+logOutBtn.on("click", handleLogout);
 createBlog.on("submit", handleCreateBlogPost);
