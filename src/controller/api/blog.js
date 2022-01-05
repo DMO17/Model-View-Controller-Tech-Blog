@@ -6,35 +6,35 @@ const {
   checkValidFields,
 } = require("../../helper/util");
 
-const getAllBlogs = async (req, res) => {
-  try {
-    const data = await Blog.findAll();
+// const getAllBlogs = async (req, res) => {
+//   try {
+//     const data = await Blog.findAll();
 
-    return res.json({ success: true, data });
-  } catch (error) {
-    return res.status(500).json({
-      success: true,
-      error: `Failed to retrieve response => ${error.message}`,
-    });
-  }
-};
+//     return res.json({ success: true, data });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: true,
+//       error: `Failed to retrieve response => ${error.message}`,
+//     });
+//   }
+// };
 
-const getBlogById = async (req, res) => {
-  try {
-    const { uuid } = req.params;
-    const data = await Blog.findOne({
-      where: {
-        blog_uuid: uuid,
-      },
-    });
-    checkBlogExists(data, uuid, res);
-  } catch (error) {
-    return res.status(500).json({
-      success: true,
-      error: `Failed to retrieve response => ${error.message}`,
-    });
-  }
-};
+// const getBlogById = async (req, res) => {
+//   try {
+//     const { uuid } = req.params;
+//     const data = await Blog.findOne({
+//       where: {
+//         blog_uuid: uuid,
+//       },
+//     });
+//     checkBlogExists(data, uuid, res);
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: true,
+//       error: `Failed to retrieve response => ${error.message}`,
+//     });
+//   }
+// };
 
 const createBlog = async (req, res) => {
   try {
@@ -68,10 +68,10 @@ const createBlog = async (req, res) => {
 
 const updateBlog = async (req, res) => {
   try {
-    const { uuid } = req.params;
+    const { blogId } = req.params;
 
     const validFields = getPayloadWithValidFieldsOnly(
-      ["title", "content", "user_id"],
+      ["title", "content", "blog_img"],
       req.body
     );
 
@@ -82,10 +82,15 @@ const updateBlog = async (req, res) => {
       });
     }
 
-    const data = await Blog.update(validFields, {
-      where: {
-        blog_uuid: uuid,
-      },
+    const allValidFields = {
+      user_id: req.session.user.id,
+      ...validFields,
+    };
+
+    const data = await Blog.update(allValidFields, {
+      where: { blog_uuid: blogId },
+      include: [{ model: User, as: "user" }],
+      raw: true,
     });
 
     if (!data[0]) {
@@ -126,8 +131,8 @@ const deleteBlog = async (req, res) => {
 };
 
 module.exports = {
-  getAllBlogs,
-  getBlogById,
+  // getAllBlogs,
+  // getBlogById,
   createBlog,
   updateBlog,
   deleteBlog,

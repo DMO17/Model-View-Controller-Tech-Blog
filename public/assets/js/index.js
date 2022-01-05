@@ -2,6 +2,7 @@ const signupForm = $(".sign-up-form");
 const loginForm = $(".log-in-form");
 const logOutBtn = $("#logout-btn");
 const createBlog = $(".create-blog");
+const editBlog = $(".edit-blog");
 
 const handleSignUp = async (event) => {
   event.preventDefault();
@@ -93,6 +94,21 @@ const handleLogin = async (event) => {
   }
 };
 
+const handleLogout = async () => {
+  const response = await fetch("/auth/logout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+
+  if (data.success) {
+    window.location.replace("/login");
+  }
+};
+
 const handleCreateBlogPost = async (event) => {
   event.preventDefault();
 
@@ -111,7 +127,6 @@ const handleCreateBlogPost = async (event) => {
       title,
       blog_img,
       content,
-      user_id: 4,
     }),
     redirect: "follow",
   });
@@ -123,18 +138,32 @@ const handleCreateBlogPost = async (event) => {
   }
 };
 
-const handleLogout = async () => {
-  const response = await fetch("/auth/logout", {
-    method: "POST",
+const handleEditBlogPost = async (event) => {
+  event.preventDefault();
+
+  const title = $("#edit-title").val();
+  const blog_img = $("#edit-img").val();
+  const content = $("#edit-content").val();
+
+  console.log(title, `${blog_img}`, content);
+  const response = await fetch("/api/blog", {
+    method: "PUT",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      title,
+      blog_img,
+      content,
+    }),
+    redirect: "follow",
   });
 
   const data = await response.json();
 
   if (data.success) {
-    window.location.replace("/login");
+    window.location.replace("/dashboard");
   }
 };
 
@@ -142,3 +171,4 @@ loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
 logOutBtn.on("click", handleLogout);
 createBlog.on("submit", handleCreateBlogPost);
+editBlog.on("submit", handleEditBlogPost);

@@ -10,46 +10,54 @@ const renderSignUpPage = (req, res) => {
 };
 
 const renderHomePage = async (req, res) => {
-  const { loggedIn } = req.session;
-  const data = await Blog.findAll({
-    include: [{ model: User }],
-    raw: true,
-  });
+  try {
+    const { loggedIn } = req.session;
+    const data = await Blog.findAll({
+      include: [{ model: User }],
+      raw: true,
+    });
 
-  console.log(data);
+    console.log(data);
 
-  // const data = blogData.map((each) => each.get({ plain: true }));
+    // const data = blogData.map((each) => each.get({ plain: true }));
 
-  res.render("home", { data, loggedIn });
+    res.render("home", { data, loggedIn });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 const renderBlog = async (req, res) => {
-  const { loggedIn } = req.session;
+  try {
+    const { loggedIn } = req.session;
 
-  const { blogId } = req.params;
+    const { blogId } = req.params;
 
-  // const blogData = await Blog.findByPk(blogId, {
-  //   include: [{ model: User, as: "user" }],
-  //   raw: true,
-  // });
+    // const blogData = await Blog.findByPk(blogId, {
+    //   include: [{ model: User, as: "user" }],
+    //   raw: true,
+    // });
 
-  const blogData = await Blog.findOne({
-    where: { blog_uuid: blogId },
-    include: [{ model: User, as: "user" }],
-    raw: true,
-  });
+    const blogData = await Blog.findOne({
+      where: { blog_uuid: blogId },
+      include: [{ model: User, as: "user" }],
+      raw: true,
+    });
 
-  console.log(blogData);
+    console.log(blogData);
 
-  // const data = blogData.get({ plain: true });
+    // const data = blogData.get({ plain: true });
 
-  if (!blogData) {
-    return res.render("no-blog");
+    if (!blogData) {
+      return res.render("no-blog");
+    }
+
+    const data = { loggedIn, ...blogData };
+
+    return res.render("blog", data);
+  } catch (error) {
+    console.log(error.message);
   }
-
-  const data = { loggedIn, ...blogData };
-
-  res.render("blog", data);
 };
 
 module.exports = {

@@ -1,0 +1,38 @@
+<h1>edit blog</h1>
+
+<div class="container edit-blog">
+  <div class="container banner mt-4">
+    <h3 class="text-center">Post Your Blog</h3>
+  </div>
+  <form action="" class="mt-4">
+
+    <div class="inputContainer">
+      <input id="edit-title" type="text" class="input" placeholder="a" />
+      <label for="" class="label">Blog Title</label>
+    </div>
+
+    <div class="inputContainer">
+      <input id="edit-img" type="text" class="input" placeholder="a" />
+      <label for="" class="label">Blog Image URL</label>
+    </div>
+
+    <div class="inputContainer">
+      <textarea
+        cols="30"
+        rows="50"
+        type="text"
+        class="input"
+        id="blog-content"
+        placeholder="a"
+      ></textarea>
+      <label for="edit-content" class="label">Write your blog</label>
+    </div>
+    <input type="submit" class="submitBtn" value="Post" />
+  </form>
+</div>
+
+<ul>
+  <li>{{title}</li>
+  <li>{{blog_img}}</li>
+  <li>{{content}}</li>
+</ul>
