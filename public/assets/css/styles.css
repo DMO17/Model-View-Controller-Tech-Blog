@@ -41,6 +41,15 @@ body {
   margin-bottom: 35px;
 }
 
+/* .content-style-1 {
+  display: -webkit-box;
+  max-width: 400px;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: center;
+} */
+
 .input {
   position: absolute;
   top: 0px;
@@ -145,7 +154,7 @@ body {
 .blog-card:hover {
   animation: grow 0.5s ease-out;
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(0.95);
   z-index: 2;
 }
 

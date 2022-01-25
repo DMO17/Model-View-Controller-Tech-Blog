@@ -13,4 +13,20 @@ module.exports = {
       return options.inverse(this);
     }
   },
+  reduceContentLength1: (content) => {
+    const reduceLength = (text, index) => {
+      if (index < 58) {
+        return text;
+      }
+    };
+    return content.split(" ").filter(reduceLength).join(" ");
+  },
+  reduceContentLength2: (content) => {
+    const reduceLength = (text, index) => {
+      if (index < 70) {
+        return text;
+      }
+    };
+    return content.split(" ").filter(reduceLength).join(" ");
+  },
 };

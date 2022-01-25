@@ -22,12 +22,13 @@
 
         <img src="{{blog_img}}" />
 
-        <p>
-        {{content}} 
+        <p >
+        {{reduceContentLength1 content}} ...
         <a href="/blog/view/{{blog_uuid}}"> view</a>
         </p>
       </div>
-      <div class="font-italic text-end h5"><u>{{username}}</u></div>
+        <div class="font-italic text-end h5"><u>username</u></div>
+
     </div>
   </div>
 
@@ -40,11 +41,11 @@
       <div class="display-6 mb-1">{{title}}</div>
 
       <div class="desc">
-        <p>
-         {{content}} <a href="/blog/view/{{blog_uuid}}"> view</a>
+        <p class="content-style-1">
+         {{reduceContentLength2 content}} ... <a href="/blog/view/{{blog_uuid}}"> view</a>
         </p>
       </div>
-      <div class="font-italic text-end h5"><u>Italic text.</u></div>
+      <div class="font-italic text-end h5"><u>username</u></div>
     </div>
   </div> 
 
