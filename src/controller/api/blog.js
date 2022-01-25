@@ -6,37 +6,8 @@ const {
   checkValidFields,
 } = require("../../helper/util");
 
-// const getAllBlogs = async (req, res) => {
-//   try {
-//     const data = await Blog.findAll();
-
-//     return res.json({ success: true, data });
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: true,
-//       error: `Failed to retrieve response => ${error.message}`,
-//     });
-//   }
-// };
-
-// const getBlogById = async (req, res) => {
-//   try {
-//     const { uuid } = req.params;
-//     const data = await Blog.findOne({
-//       where: {
-//         blog_uuid: uuid,
-//       },
-//     });
-//     checkBlogExists(data, uuid, res);
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: true,
-//       error: `Failed to retrieve response => ${error.message}`,
-//     });
-//   }
-// };
-
 const createBlog = async (req, res) => {
+  const errorMessage = "Failed to create Blog post";
   try {
     const validFields = getPayloadWithValidFieldsOnly(
       ["title", "content", "blog_img"],
@@ -44,9 +15,10 @@ const createBlog = async (req, res) => {
     );
 
     if (Object.keys(validFields).length != 3) {
+      console.log(`[ERROR]: ${errorMessage} | invalid fields`);
       return res.status(400).json({
         success: false,
-        error: `please provide the correct body fields `,
+        message: errorMessage,
       });
     }
 
@@ -59,14 +31,16 @@ const createBlog = async (req, res) => {
 
     return res.json({ success: true, data: blog });
   } catch (error) {
-    return res.json({
+    console.log(`[ERROR]: ${errorMessage} | ${error.message}`);
+    return res.status(500).json({
       success: false,
-      error: `Failed to create a blog => ${error.message}`,
+      message: errorMessage,
     });
   }
 };
 
 const updateBlog = async (req, res) => {
+  const errorMessage = "Failed to update blog post";
   try {
     const { uuid } = req.params;
 
@@ -78,9 +52,12 @@ const updateBlog = async (req, res) => {
     );
 
     if (Object.keys(validFields).length != 3) {
-      return res.status(400).json({
+      console.log(
+        `[ERROR]: ${errorMessage} | Please Provide The Correct required Post Body Fields`
+      );
+      return res.status(500).json({
         success: false,
-        error: `please provide the correct body fields `,
+        message: errorMessage,
       });
     }
 
@@ -95,21 +72,23 @@ const updateBlog = async (req, res) => {
     });
 
     if (!data[0]) {
-      return res
-        .status(404)
-        .json({ success: false, message: "No Blog with this id exists" });
+      console.log(`[ERROR]: ${errorMessage} | No Blog with this id exists`);
+      return res.status(404).json({ success: false, message: errorMessage });
     }
 
     return res.json({ success: true, data });
   } catch (error) {
-    return res.json({
+    console.log(`[ERROR]: ${errorMessage} | ${error.message}`);
+    return res.status(500).json({
       success: false,
-      error: `Failed to create a blog => ${error.message}`,
+      message: errorMessage,
     });
   }
 };
 
 const deleteBlog = async (req, res) => {
+  const errorMessage = "Failed to delete blog post";
+
   try {
     const { uuid } = req.params;
 
@@ -119,21 +98,26 @@ const deleteBlog = async (req, res) => {
       },
     });
     if (!data) {
-      return res.status(404).json({ message: "No Blog with this id exists" });
+      console.log(
+        `[ERROR]: ${errorMessage} | No blog post with this ID exists`
+      );
+      return res.status(500).json({
+        success: false,
+        message: errorMessage,
+      });
     }
 
     return res.json({ success: true, data: "Deleted Blog" });
   } catch (error) {
+    console.log(`[ERROR]: ${errorMessage} | ${error.message}`);
     return res.status(500).json({
-      success: true,
-      error: `Failed to retrieve response => ${error.message}`,
+      success: false,
+      message: errorMessage,
     });
   }
 };
 
 module.exports = {
-  // getAllBlogs,
-  // getBlogById,
   createBlog,
   updateBlog,
   deleteBlog,
