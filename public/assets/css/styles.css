@@ -5,8 +5,15 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: whitesmoke;
+  background-color: rgb(235, 201, 158);
   font-family: "lato", sans-serif;
+}
+
+.bg-img {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: url("https://kaylabreese.files.wordpress.com/2018/11/pr-journalism.jpg");
+  background-size: cover;
 }
 
 .content-text {
@@ -86,7 +93,7 @@ body {
   margin-left: auto;
   padding: 15px 30px;
   border: none;
-  background-color: blueviolet;
+  background-color: rgb(214, 211, 216);
   color: yellow;
   border-radius: 6px;
   cursor: pointer;
@@ -130,7 +137,7 @@ body {
 }
 
 .item {
-  background-color: #ccc;
+  background-color: rgb(235, 235, 235);
 }
 
 .photothumb {
@@ -318,4 +325,21 @@ h6 {
   margin: 0 10px 0 0;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+
+/* banner  */
+.bg-image-full {
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center;
+  background-size: cover;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
 }
