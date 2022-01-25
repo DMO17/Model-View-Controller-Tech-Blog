@@ -145,26 +145,35 @@ const handleCreateBlogPost = async (event) => {
   const title = $("#blog-title").val();
   const blog_img = $("#blog-img").val();
   const content = $("#blog-content").val();
+  const alertMessage = $("#alert-message");
 
-  console.log(title, `${blog_img}`, content);
-  const response = await fetch("/api/blog", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title,
-      blog_img,
-      content,
-    }),
-    redirect: "follow",
-  });
+  if (title && blog_img && content) {
+    const response = await fetch("/api/blog", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        blog_img,
+        content,
+      }),
+      redirect: "follow",
+    });
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (data.success) {
-    window.location.replace("/dashboard");
+    if (data.success) {
+      window.location.replace("/dashboard");
+    }
+  } else {
+    const warning = `<div class="alert alert-warning" role="alert">
+  Please fill in all the fields
+ </div>`;
+    alertMessage.empty();
+
+    return alertMessage.append(warning);
   }
 };
 
@@ -178,27 +187,37 @@ const handleEditBlogPost = async (event) => {
   const title = $("#edit-title").val();
   const blog_img = $("#edit-img").val();
   const content = $("#edit-content").val();
+  const alertMessage = $("#alert-message");
 
   console.log(title, blog_img, content);
 
-  const response = await fetch(`/api/blog/${id}`, {
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title,
-      blog_img,
-      content,
-    }),
-    redirect: "follow",
-  });
+  if (title && blog_img && content) {
+    const response = await fetch(`/api/blog/${id}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        blog_img,
+        content,
+      }),
+      redirect: "follow",
+    });
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (data.success) {
-    window.location.replace("/dashboard");
+    if (data.success) {
+      window.location.replace("/dashboard");
+    }
+  } else {
+    const warning = `<div class="alert alert-warning" role="alert">
+  Please fill in all the fields 
+ </div>`;
+    alertMessage.empty();
+
+    return alertMessage.append(warning);
   }
 };
 

@@ -37,3 +37,7 @@ get: /blog/:id , getBlogById
 post: /blog , createBlog
 put: /blog:id , updateBlogById
 delete: /blog/:id , deleteBlogById
+
+
+need to fix home page error 
+sign up validator
