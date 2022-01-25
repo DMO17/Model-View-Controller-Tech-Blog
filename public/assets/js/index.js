@@ -13,6 +13,7 @@ const handleSignUp = async (event) => {
   const username = $("#username").val();
   const password = $("#password").val();
   const confirmPassword = $("#confirm-password").val();
+  const alertMessage = $("#alert-message");
 
   console.log(password, confirmPassword);
 
@@ -41,21 +42,41 @@ const handleSignUp = async (event) => {
       const warning = `<div class="alert alert-success" role="alert">
        The email or username already has an account
       </div>`;
+      alertMessage.empty();
 
-      return signupForm.append(warning);
+      alertMessage.append(warning);
     }
-  } else if (password === confirmPassword && password.length < 8) {
+  }
+  if (
+    !first_name ||
+    !last_name ||
+    !email ||
+    !username ||
+    !password ||
+    !confirmPassword
+  ) {
+    const warning = `<div class="alert alert-success" role="alert">
+    Please Fill out the required fields to sign-up
+  </div>`;
+
+    alertMessage.empty();
+    alertMessage.append(warning);
+  }
+  if (password === confirmPassword && password.length < 8) {
     const warning = `<div class="alert alert-success" role="alert">
      Your password must be have over 8 characters
     </div>`;
-
-    return signupForm.append(warning);
-  } else {
+    alertMessage.empty();
+    alertMessage.append(warning);
+  }
+  if (password != confirmPassword && password.length > 8) {
     const warning = `<div class="alert alert-success" role="alert">
     Your confirm password does'nt match
   </div>`;
 
-    return signupForm.append(warning);
+    alertMessage.empty();
+
+    alertMessage.append(warning);
   }
 };
 
