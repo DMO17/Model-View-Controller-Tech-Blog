@@ -64,33 +64,42 @@ const handleLogin = async (event) => {
 
   const username = $("#username").val();
   const password = $("#password").val();
+  const alertMessage = $("#alert-message");
 
-  console.log(username, password);
+  if (username && password) {
+    const response = await fetch("/auth/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
 
-  const response = await fetch("/auth/login", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username,
+        password,
+      }),
+      redirect: "follow",
+    });
 
-      password,
-    }),
-    redirect: "follow",
-  });
+    const data = await response.json();
 
-  const data = await response.json();
+    if (data.success) {
+      window.location.replace("/dashboard");
+    } else {
+      const warning = `<div class="alert alert-warning" role="alert">
+   Incorrect Email or Password 
+   </div>`;
+      alertMessage.empty();
 
-  if (data.success) {
-    window.location.replace("/dashboard");
+      return alertMessage.append(warning);
+    }
   } else {
-    const warning = `<div class="alert alert-success" role="alert">
-      Username or password is incorrect
-    </div>`;
+    const warning = `<div class="alert alert-warning" role="alert">
+  Please fill in the fields to log in
+ </div>`;
+    alertMessage.empty();
 
-    return loginForm.append(warning);
+    return alertMessage.append(warning);
   }
 };
 
