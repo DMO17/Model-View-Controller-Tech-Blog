@@ -22,6 +22,17 @@ body {
   opacity: 0.95;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:active,
+.link:visited,
+.link:focus {
+  color: black;
+}
+
 .content-text {
   line-height: 35px;
 }

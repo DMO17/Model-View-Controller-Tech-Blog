@@ -29,8 +29,8 @@
 {{#each data}}
 
 {{#index id}}
-
-   <div class="item project blog-card">
+ <a class="link" href="/blog/view/{{blog_uuid}}">
+ <div class="item project blog-card">
     <div class="content">
       <div class="desc">
         <div class="display-6 mb-1">{{title}}</div>
@@ -39,17 +39,19 @@
 
         <p >
         {{reduceContentLength1 content}} ...
-        <a href="/blog/view/{{blog_uuid}}"> view</a>
         </p>
       </div>
         <div class="font-italic text-end h5"><u>username</u></div>
 
     </div>
   </div>
+  </a>
+ 
 
 {{else}} 
 
- <div class="item photo blog-card">
+ <a class="link" href="/blog/view/{{blog_uuid}}">
+  <div class="item photo blog-card">
     <div class="content">
       <img class="photothumb" src="{{blog_img}}" />
 
@@ -57,12 +59,14 @@
 
       <div class="desc">
         <p class="content-style-1">
-         {{reduceContentLength2 content}} ... <a href="/blog/view/{{blog_uuid}}"> view</a>
+         {{reduceContentLength2 content}} ... 
         </p>
       </div>
       <div class="font-italic text-end h5"><u>username</u></div>
     </div>
   </div> 
+ </a>
+
 
  {{/index}}
 
