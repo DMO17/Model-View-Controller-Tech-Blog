@@ -27,44 +27,8 @@ const renderHomePage = async (req, res) => {
   }
 };
 
-const renderBlog = async (req, res) => {
-  try {
-    const { loggedIn } = req.session;
-
-    const username = req.session.user.username;
-
-    const { blogId } = req.params;
-
-    // const blogData = await Blog.findByPk(blogId, {
-    //   include: [{ model: User, as: "user" }],
-    //   raw: true,
-    // });
-
-    const blogData = await Blog.findOne({
-      where: { blog_uuid: blogId },
-      include: [{ model: User, as: "user" }],
-      raw: true,
-    });
-
-    console.log(blogData);
-
-    // const data = blogData.get({ plain: true });
-
-    if (!blogData) {
-      return res.render("no-blog");
-    }
-
-    const data = { loggedIn, ...blogData };
-
-    return res.render("blog", data);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
 module.exports = {
   renderHomePage,
   renderLoginPage,
   renderSignUpPage,
-  renderBlog,
 };

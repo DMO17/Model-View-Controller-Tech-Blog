@@ -95,7 +95,7 @@ body {
   left: 0px;
   height: 100%;
   width: 100%;
-  border: 1px solid #dadce0;
+  border: 1px solid black;
   border-radius: 7px;
   font-size: 16px;
   padding: 0 20px;
@@ -113,8 +113,8 @@ body {
   top: 15px;
   left: 15px;
   padding: 0 4px;
-  background-color: white;
-  color: rgb(122, 101, 73);
+  background-color: brown;
+  color: black;
   font-size: 16px;
   transition: 0.5s;
   z-index: 0;
@@ -144,11 +144,11 @@ body {
   z-index: 10;
   font-size: 14px;
   font-weight: 600;
-  color: brown;
+  color: whitesmoke;
 }
 
 .input:focus {
-  border: 2px solid purple;
+  border: 2px solid brown;
 }
 
 .input:not(:placeholder-shown) + .label {

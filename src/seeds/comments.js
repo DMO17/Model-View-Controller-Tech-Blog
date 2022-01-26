@@ -2,54 +2,54 @@ const Comment = require("../models/Comment");
 
 const commentData = [
   {
-    comment: "user 2 comment on user 1 blog on Python for Creating Mobile Apps",
-    blog_id: "uiearbgueabgu",
-    user_id: 2,
-  },
-  {
-    comment: "user 3 comment on user 1 blog on Python for Creating Mobile Apps",
-    blog_id: "uiearbgueabgu",
-    user_id: 3,
-  },
-  {
-    comment: "user 1 comment on user 1 blog on Python for Creating Mobile Apps",
-    blog_id: "uiearbgueabgu",
-    user_id: 1,
-  },
-  {
-    comment: "",
+    comment: "otnhot nhtrh iat hatrhrt",
     blog_id: 1,
     user_id: 2,
   },
   {
-    comment: "user 2 comment on user 1 blog on Backend Chaos",
+    comment: "oirnhpotahpot hpoatrh",
+    blog_id: 1,
+    user_id: 3,
+  },
+  {
+    comment: "r0tjh0rt9hn0atrh",
     blog_id: 2,
     user_id: 2,
   },
   {
-    comment: "user 3 comment on user 1 blog on Backend Chaos",
+    comment: "aotmhtanhmartnharth",
     blog_id: 2,
     user_id: 3,
   },
   {
-    comment: "user 1 comment on user 2 blog on Technological Marvels of 2021",
-    blog_id: 2,
-    user_id: 2,
-  },
-  {
-    comment: "user 3 comment on user 1 blog on Python for Creating Mobile Apps",
-    blog_id: 3,
-    user_id: 2,
-  },
-  {
-    comment: "user 1 comment on user 1 blog on Python for Creating Mobile Apps",
+    comment: "artharthatrhatrhtah",
     blog_id: 3,
     user_id: 1,
   },
   {
-    comment: "user 2 comment on user 2 blog on Python for Creating Mobile Apps",
+    comment: "rthathatrharth",
     blog_id: 3,
+    user_id: 1,
+  },
+  {
+    comment: "arthatrhatrhtraahatr",
+    blog_id: 4,
     user_id: 2,
+  },
+  {
+    comment: "rathatrhtahathtarh",
+    blog_id: 4,
+    user_id: 1,
+  },
+  {
+    comment: "ratharthrtaharth",
+    blog_id: 5,
+    user_id: 2,
+  },
+  {
+    comment: "rtaharthatrhta",
+    blog_id: 6,
+    user_id: 1,
   },
 ];
 

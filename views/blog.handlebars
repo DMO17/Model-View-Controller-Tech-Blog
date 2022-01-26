@@ -12,14 +12,14 @@
     <div class="item photo">
   <div class="m-5">
     <div class="content">
-      <div class="title text-center mb-2">{{title}}</div>
+      <div class="title text-center mb-2">{{serializedData.title}}</div>
 
-      <div class="mb-3">  {{"user.first_name"}} {{"user.last_name"}} {{"user.username"}} {{"user.email"}} {{createdAt}}</div>
+      <div class="mb-3">  {{serializedData.user.first_name}} {{serializedData.user.last_name}} {{serializedData.user.username}} {{serializedData.user.email}} {{serializedData.createdAt}}</div>
 
-      <img class="photothumb mb-2" src="{{blog_img}}" />
+      <img class="photothumb mb-2" src="{{serializedData.blog_img}}" />
 
       <div class="desc mt-3">
-        <p class="h4 content-text">{{content}}</p>
+        <p class="h4 content-text">{{serializedData.content}}</p>
       </div>
     </div>
   </div>

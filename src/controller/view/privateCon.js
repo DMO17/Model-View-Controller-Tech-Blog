@@ -1,4 +1,4 @@
-const { Blog, User } = require("../../models");
+const { Blog, User, Comment } = require("../../models");
 
 const renderDashboard = async (req, res) => {
   const { loggedIn } = req.session;
@@ -53,7 +53,43 @@ const renderEditBlogForm = async (req, res) => {
   }
 };
 
-module.exports = { renderDashboard, renderBlogForm, renderEditBlogForm };
+const renderBlog = async (req, res) => {
+  try {
+    const { loggedIn } = req.session;
+
+    const username = req.session.user.username;
+
+    const { blogId } = req.params;
+
+    const blogData = await Blog.findOne({
+      where: { blog_uuid: blogId },
+      include: [{ model: User, as: "user" }, { model: Comment }],
+    });
+
+    if (!blogData) {
+      return res.render("no-blog");
+    }
+
+    const handlebarsBlogData = {
+      serializedData: blogData.get({ plain: true }),
+      isCommentMine: "fhrt",
+    };
+
+    const data = { loggedIn, ...handlebarsBlogData };
+    console.log(handlebarsBlogData);
+
+    return res.render("blog", data);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+module.exports = {
+  renderDashboard,
+  renderBlogForm,
+  renderEditBlogForm,
+  renderBlog,
+};
 
 // const serializedData = {
 //   posts: blogData.map((posts) => posts.get({ plain: true })),
