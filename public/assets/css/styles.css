@@ -31,14 +31,14 @@ body {
   opacity: 0.95;
 }
 
-.link {
+.link-style {
   text-decoration: none;
   color: black;
 }
 
-.link:active,
-.link:visited,
-.link:focus {
+.link-style:active,
+.link-style:visited,
+.link-style:focus {
   color: black;
 }
 

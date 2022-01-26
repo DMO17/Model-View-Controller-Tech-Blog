@@ -30,25 +30,22 @@ const renderEditBlogForm = async (req, res) => {
 
     const { blogId } = req.params;
 
-    // const blogData = await Blog.findByPk(blogId, {
-    //   include: [{ model: User, as: "user" }],
-    //   raw: true,
-    // });
-
     const blogData = await Blog.findOne({
       where: { blog_uuid: blogId },
-      raw: true,
+      include: [{ model: User }],
+      // raw: true,
     });
 
-    console.log(blogData);
+    const serializedData = blogData.get({ plain: true });
 
-    // const data = blogData.get({ plain: true });
+    const handlebarsBlogEditData = {
+      serializedData,
+      myBlogEdit: req.session.user.id === serializedData.user.id,
+    };
 
-    if (!blogData) {
-      return res.render("no-blog");
-    }
+    const data = { loggedIn, ...handlebarsBlogEditData };
 
-    const data = { loggedIn, ...blogData };
+    console.log(data);
 
     return res.render("edit-blog", data);
   } catch (error) {
@@ -57,3 +54,14 @@ const renderEditBlogForm = async (req, res) => {
 };
 
 module.exports = { renderDashboard, renderBlogForm, renderEditBlogForm };
+
+// const serializedData = {
+//   posts: blogData.map((posts) => posts.get({ plain: true })),
+// };
+
+// const blogPostData = serializedData.posts.map((blog) => {
+//   return {
+//     ...serializedData,
+//     myBlogEdit: req.session.user.id === blog.User.id,
+//   };
+// });
