@@ -3,6 +3,7 @@ const loginForm = $(".log-in-form");
 const logOutBtn = $("#logout-btn");
 const createBlog = $(".create-blog");
 const editBlog = $(".edit-blog");
+const deleteBlog = $(".delete-btn");
 
 const handleSignUp = async (event) => {
   event.preventDefault();
@@ -221,8 +222,32 @@ const handleEditBlogPost = async (event) => {
   }
 };
 
+const handleDeleteBlog = async (event) => {
+  event.preventDefault();
+  const { id } = event.target;
+
+  const confirmMessage = confirm("Are you sure you want to delete this blog");
+
+  if (confirmMessage) {
+    const response = await fetch(`api/blog/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      return window.location.replace("/dashboard");
+    }
+  }
+};
+
 loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
 logOutBtn.on("click", handleLogout);
+deleteBlog.on("click", handleDeleteBlog);
 createBlog.on("submit", handleCreateBlogPost);
 editBlog.on("submit", handleEditBlogPost);
