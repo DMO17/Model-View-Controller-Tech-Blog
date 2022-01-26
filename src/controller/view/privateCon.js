@@ -63,20 +63,36 @@ const renderBlog = async (req, res) => {
 
     const blogData = await Blog.findOne({
       where: { blog_uuid: blogId },
-      include: [{ model: User, as: "user" }, { model: Comment }],
+      include: [
+        { model: User, as: "user" },
+        { model: Comment, include: User },
+      ],
     });
 
     if (!blogData) {
       return res.render("no-blog");
     }
 
-    const handlebarsBlogData = {
+    // const serializedData = { blogInfo: blogData.get({ plain: true }) };
+
+    // const data = { loggedIn, ...handlebarsBlogData };
+    // console.log(handlebarsBlogData.serializedData.comments);
+
+    const blogComments = blogData
+      .get({ plain: true })
+      .comments.map((comment) => {
+        return {
+          myBlogComment: req.session.user.id === comment.user.id,
+        };
+      });
+
+    const data = {
+      loggedIn,
       serializedData: blogData.get({ plain: true }),
-      isCommentMine: "fhrt",
+      blogComments,
     };
 
-    const data = { loggedIn, ...handlebarsBlogData };
-    console.log(handlebarsBlogData);
+    console.log(data);
 
     return res.render("blog", data);
   } catch (error) {
@@ -94,10 +110,3 @@ module.exports = {
 // const serializedData = {
 //   posts: blogData.map((posts) => posts.get({ plain: true })),
 // };
-
-// const blogPostData = serializedData.posts.map((blog) => {
-//   return {
-//     ...serializedData,
-//     myBlogEdit: req.session.user.id === blog.User.id,
-//   };
-// });

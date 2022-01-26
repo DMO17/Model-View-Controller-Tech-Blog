@@ -1,4 +1,4 @@
-const { Model, DataTypes, UUID } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const connection = require("../config/connection");
 
 const schema = {
