@@ -18,14 +18,11 @@
       />
       <div class="card-body">
         <h5 class="card-title">{{title}}</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
+        <p class="card-text content-style-1"> {{content}}  </p>
         <div class="text-center">
-          <a href="/blog/view/{{blog_uuid}}" class="card-link">View <i class="fas fa-pen"></i></a>
-          <a href="#" class="card-link">Edit <i class="fas fa-pen"></i></a>
-          <a href="#" class="card-link">Delete <i class="fas fa-trash"></i></a>
+          <a href="/blog/View/{{blog_uuid}}" class="card-link">View <i class="fas fa-pen"></i></a>
+          <a href="/blog/Edit/{{blog_uuid}}" class="card-link">Edit <i class="fas fa-pen"></i></a>
+          <a href="#" class="card-link delete-btn">Delete <i class="fas fa-trash"></i></a>
         </div>
       </div>
     </div>

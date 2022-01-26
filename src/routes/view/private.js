@@ -7,10 +7,10 @@ const {
 
 const router = Router();
 
-router.use("/blog/create", renderBlogForm);
+router.get("/blog/create", renderBlogForm);
 
-router.use("/blog/edit/:blogId", renderEditBlogForm);
+router.get("/blog/edit/:blogId", renderEditBlogForm);
 
-router.use("/dashboard", renderDashboard);
+router.get("/dashboard", renderDashboard);
 
 module.exports = router;
