@@ -22,6 +22,15 @@ body {
   opacity: 0.95;
 }
 
+.view-page {
+  margin-right: 150px;
+  margin-left: 150px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background-color: whitesmoke;
+  opacity: 0.95;
+}
+
 .link {
   text-decoration: none;
   color: black;
