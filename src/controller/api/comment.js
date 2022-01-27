@@ -4,52 +4,6 @@ const { getPayloadWithValidFieldsOnly } = require("../../helper/util");
 
 /// REFACTORED AND ADJUSTED
 
-const createAComments = async (req, res) => {
-  try {
-    // check if blog exists
-    const { id, uuid } = req.params;
-
-    const data = await Blog.findOne({
-      where: {
-        blog_uuid: uuid,
-      },
-    });
-
-    const blog = checkBlogExists(data, uuid, res);
-
-    // true create a comment
-    if (blog) {
-      const validFields = getPayloadWithValidFieldsOnly(
-        ["comment", "user_id"],
-        req.body
-      );
-
-      const allValidFields = {
-        blog_id: uuid,
-        ...validFields,
-      };
-
-      console.log(allValidFields);
-
-      if (Object.keys(allValidFields).length != 2) {
-        return res.status(404).json({
-          success: false,
-          error: `Please provide the correct fields`,
-        });
-      }
-
-      const data = await Comment.create(validFields);
-
-      return res.json({ success: true, data });
-    }
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      error: `Failed to retrieve response => ${error.message}`,
-    });
-  }
-};
-
 const createAComment = async (req, res) => {
   const errorMessage = "Failed to create comment";
 
@@ -73,14 +27,14 @@ const createAComment = async (req, res) => {
 
     const blogInfo = await Blog.findOne({
       where: { blog_uuid: uuid },
-    }).get({ plain: true });
+    });
 
-    const blogId = blogInfo.id;
+    const serializedBlogData = blogInfo.get({ plain: true });
 
     const payload = {
       user_id: req.session.user.id,
-      blog_id: blogInfo.id,
-      ...validFields,
+      blog_id: serializedBlogData.id,
+      ...validPostBodyFields,
     };
 
     const comment = await Comment.create(payload);

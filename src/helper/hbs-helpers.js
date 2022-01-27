@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 module.exports = {
   index: function (conditional, options) {
     if (conditional % 2 == 0) {
@@ -28,5 +30,8 @@ module.exports = {
       }
     };
     return content.split(" ").filter(reduceLength).join(" ");
+  },
+  dateFormatter: (date) => {
+    return moment(date).format("DD/MM/YYYY");
   },
 };
