@@ -170,9 +170,7 @@ const deleteAComment = async (req, res) => {
 };
 
 module.exports = {
-  getAllComments,
   createAComment,
   updateAComment,
   deleteAComment,
-  getCommentById,
 };

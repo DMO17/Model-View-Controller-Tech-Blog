@@ -81,6 +81,13 @@ body {
   margin-bottom: 35px;
 }
 
+.inputContainer3 {
+  position: relative;
+  height: 100px;
+  width: 75%;
+  margin-bottom: 35px;
+}
+
 .content-style-1 {
   display: -webkit-box;
   max-width: 400px;

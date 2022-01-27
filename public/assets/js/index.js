@@ -4,6 +4,7 @@ const logOutBtn = $("#logout-btn");
 const createBlog = $(".create-blog");
 const editBlog = $(".edit-blog");
 const deleteBlog = $(".delete-btn");
+const commentForm = $(".comment-form");
 
 const handleSignUp = async (event) => {
   event.preventDefault();
@@ -245,9 +246,45 @@ const handleDeleteBlog = async (event) => {
   }
 };
 
+const handleCommentSubmission = async (event) => {
+  event.preventDefault();
+
+  const { id } = event.target;
+  ///blog/:uuid/comment
+  const comment = $("#user-comment").val();
+  const alertMessage = $("#alert-message");
+
+  console.log(comment);
+
+  if (comment) {
+    const response = await fetch(`/api/blog/${id}/comment`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      return window.location.replace(`/blog/View/${id}`);
+    }
+  } else {
+    const warning = `<div class="alert alert-warning" role="alert">
+  Please fill in all the fields 
+ </div>`;
+    alertMessage.empty();
+
+    return alertMessage.append(warning);
+  }
+};
+
 loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
 logOutBtn.on("click", handleLogout);
 deleteBlog.on("click", handleDeleteBlog);
 createBlog.on("submit", handleCreateBlogPost);
 editBlog.on("submit", handleEditBlogPost);
+commentForm.on("submit", handleCommentSubmission);
