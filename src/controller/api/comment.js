@@ -1,27 +1,10 @@
 const { Comment, Blog } = require("../../models");
 
-const {
-  getPayloadWithValidFieldsOnly,
-  checkBlogExists,
-  checkValidFields,
-} = require("../../helper/util");
+const { getPayloadWithValidFieldsOnly } = require("../../helper/util");
 
 /// REFACTORED AND ADJUSTED
 
-const getAllComments = async (req, res) => {
-  try {
-    const data = await Comment.findAll();
-
-    return res.json({ success: true, data });
-  } catch (error) {
-    return res.status(500).json({
-      success: true,
-      error: `Failed to retrieve response => ${error.message}`,
-    });
-  }
-};
-
-const createAComment = async (req, res) => {
+const createAComments = async (req, res) => {
   try {
     // check if blog exists
     const { id, uuid } = req.params;
@@ -63,6 +46,51 @@ const createAComment = async (req, res) => {
     return res.status(500).json({
       success: false,
       error: `Failed to retrieve response => ${error.message}`,
+    });
+  }
+};
+
+const createAComment = async (req, res) => {
+  const errorMessage = "Failed to create comment";
+
+  try {
+    const { uuid } = req.params;
+
+    const validPostBodyFields = getPayloadWithValidFieldsOnly(
+      ["comment"],
+      req.body
+    );
+
+    if (Object.keys(validPostBodyFields).length != 1) {
+      console.log(
+        `[ERROR]: ${errorMessage} | Please Provide The Correct required Post Body Fields`
+      );
+      return res.status(500).json({
+        success: false,
+        message: errorMessage,
+      });
+    }
+
+    const blogInfo = await Blog.findOne({
+      where: { blog_uuid: uuid },
+    }).get({ plain: true });
+
+    const blogId = blogInfo.id;
+
+    const payload = {
+      user_id: req.session.user.id,
+      blog_id: blogInfo.id,
+      ...validFields,
+    };
+
+    const comment = await Comment.create(payload);
+
+    return res.json({ success: true, data: comment });
+  } catch (error) {
+    console.log(`[ERROR]: ${errorMessage} | ${error.message}`);
+    return res.status(500).json({
+      success: false,
+      message: errorMessage,
     });
   }
 };
@@ -136,26 +164,6 @@ const deleteAComment = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      error: `Failed to retrieve response => ${error.message}`,
-    });
-  }
-};
-
-const getCommentById = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const data = await Comment.findByPk(id);
-
-    data
-      ? res.json({ success: true, data })
-      : res.json({
-          success: false,
-          error: `Comment with id of ${id} doest exist`,
-        });
-  } catch (error) {
-    return res.status(500).json({
-      success: true,
       error: `Failed to retrieve response => ${error.message}`,
     });
   }
