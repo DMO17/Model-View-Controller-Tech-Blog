@@ -254,8 +254,6 @@ const handleCommentSubmission = async (event) => {
   const comment = $("#user-comment").val();
   const alertMessage = $("#alert-message");
 
-  console.log(comment);
-
   if (comment) {
     const response = await fetch(`/api/blog/${id}/comment`, {
       method: "POST",

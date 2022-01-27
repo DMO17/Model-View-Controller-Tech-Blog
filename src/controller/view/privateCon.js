@@ -6,15 +6,19 @@ const renderDashboard = async (req, res) => {
   const blogs = await Blog.findAll({
     where: { user_id: req.session.user.id },
     include: [{ model: User, as: "user" }],
-    // raw: true,
+  });
+
+  const comments = await Comment.findAll({
+    where: { user_id: req.session.user.id },
   });
 
   const data = {
     loggedIn,
     blogs: blogs.map((blog) => blog.get({ plain: true })),
+    comments: comments.map((comment) => comment.get({ plain: true })),
   };
 
-  console.log(data);
+  console.log(data.comments);
 
   res.render("dashboard", data);
 };
@@ -106,7 +110,3 @@ module.exports = {
   renderEditBlogForm,
   renderBlog,
 };
-
-// const serializedData = {
-//   posts: blogData.map((posts) => posts.get({ plain: true })),
-// };

@@ -1,10 +1,6 @@
 const { Blog, User } = require("../../models");
 
-const {
-  getPayloadWithValidFieldsOnly,
-  checkBlogExists,
-  checkValidFields,
-} = require("../../helper/util");
+const { getPayloadWithValidFieldsOnly } = require("../../helper/util");
 
 const createBlog = async (req, res) => {
   const errorMessage = "Failed to create Blog post";

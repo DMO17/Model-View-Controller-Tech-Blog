@@ -21,9 +21,6 @@
       </div>
   </section>
 
-
-
-
  <div class="container grid ">
 
 {{#each data}}
@@ -42,16 +39,13 @@
         {{reduceContentLength1 content}} ...
         </p>
       </div>
-        <div class="font-italic text-end h5"><u>username</u></div>
+        <div class="font-italic text-end h5"><u>{{'user.username'}}</u></div>
 
     </div>
      </a>
   </div>
  
- 
-
 {{else}} 
-
 
   <div class="item photo blog-card">
  <a class="link-style" href="/blog/view/{{blog_uuid}}">
@@ -65,15 +59,12 @@
          {{reduceContentLength2 content}} ... 
         </p>
       </div>
-      <div class="font-italic text-end h5"><u>username</u></div>
+      <div class="font-italic text-end h5"><u> {{'user.username'}}</u></div>
     </div>
      </a>
   </div> 
 
-
-
  {{/index}}
-
 
 {{/each}}
 
