@@ -2,10 +2,12 @@
 <header>
   {{> private-navbar}}
 </header>
-<main class="bg-img">
-<h1>DASHBOARD</h1>
 
-<div class="d-flex flex-wrap flex-row ">
+<main class="bg-img">
+
+<h1 class="text-center text-light">Blog Posts</h1>
+
+<div class="d-flex  flex-lg-row flex-sm-column justify-content-between mb-5">
 <div class="container parent ">
   <div class="blog-container ">
 
@@ -32,26 +34,29 @@
 
   </div>
 </div>
+</div>
 
-{{#each comments}}
-<div class="comment-widgets m-b-20 container bg-light">
-  <div class="d-flex flex-row comment-row">
-    <div class="p-2"></div>
-    <div class="comment-text w-100">
-      {{!-- <h5>{{user.first_name}} {{user.last_name}}</h5> --}}
-      <div class="comment-footer">
-        <span class="date">{{dateFormatter createdAt}}</span>
+
+<h1 class="text-center text-light">Comment Posts</h1>
+
+<div class="container parent d-flex  flex-row flex-wrap mb-5">
+  {{#each comments}}
+    <div class="comment-container">
+      <div class="card mb-2">
+        <div class=" mb-0">
+          <div class="h3 text-center">Blog title</div>
+        <div class="mb-3 card-body text-center"> {{comment}} </div>
+         <p class="text-center">{{dateFormatter createdAt}}</p>
+        </div>
+        <div class="text-center">
+          <a href="#" class="card-link">Edit <i class="fas fa-pen"></i></a>
+          <a href="#" class="card-link delete-comment" id="{{id}}" >Delete <i class="fas fa-trash"></i></a>
+        </div>
       </div>
-      <p class="m-b-5 m-t-10">
-        {{comment}}
-      </p>
-      <div><button type="button" class="btn btn-primary">DELETE</button></div>
-    </div>
-  </div>
+</div> 
+ {{/each}}
 </div>
-{{/each}}
 
-</div>
 
 </main>
 
@@ -59,32 +64,8 @@
 
 
 
-{{!-- 
-    <div class="comment-container">
-     
-      {{#each comments}}
 
-      <div class="card mb-2">
-        <div class=" mb-0">
-          <div class="h3 text-center">Blog title</div>
-        <div class="mb-3 card-body"> {{comment}}</div>
-         <p class="text-center">{{dateFormatter createdAt}}</p>
-        </div>
-        <div class="text-center">
-          <a href="#" class="card-link">Edit <i class="fas fa-pen"></i></a>
-          <a href="#" class="card-link">Delete <i class="fas fa-trash"></i></a>
-        </div>
-      </div>
-       
-       {{/each}}
 
-      <!-- comment 2 -->
-      <div class="card mb-2">
-        <div class="card-body">This is some text within a card body.</div>
-        <div class="text-center">
-          <a href="#" class="card-link">Edit <i class="fas fa-pen"></i></a>
-          <a href="#" class="card-link">Delete <i class="fas fa-trash"></i></a>
-        </div>
-      </div>
 
-</div> --}}
+
+

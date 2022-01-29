@@ -84,7 +84,7 @@ const updateBlog = async (req, res) => {
 
 const deleteBlog = async (req, res) => {
   const errorMessage = "Failed to delete blog post";
-
+  console.log("controller function being hit ");
   try {
     const { uuid } = req.params;
 

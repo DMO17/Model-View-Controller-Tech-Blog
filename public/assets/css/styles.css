@@ -205,14 +205,14 @@ body {
 }
 
 /* dashboard */
-.parent {
+/* .parent {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
+} */
 
 .blog-container {
-  flex: 70%;
+  flex: 50%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -225,11 +225,12 @@ body {
   background-color: burlywood;
 }
 
-.comment-container .card-body {
+/* .comment-container .card-body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
+} */
+
 .padding {
   padding: 3rem !important;
 }

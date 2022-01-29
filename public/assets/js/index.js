@@ -5,6 +5,7 @@ const createBlog = $(".create-blog");
 const editBlog = $(".edit-blog");
 const deleteBlog = $(".delete-btn");
 const commentForm = $(".comment-form");
+const deleteAComment = $(".delete-comment");
 
 const handleSignUp = async (event) => {
   event.preventDefault();
@@ -279,6 +280,30 @@ const handleCommentSubmission = async (event) => {
   }
 };
 
+const handleDeleteCommentById = async (event) => {
+  event.preventDefault();
+  const { id } = event.target;
+  console.log(id);
+
+  const deleteConfirmation = confirm(
+    "Are you sure you want to delete this blog comment"
+  );
+
+  if (deleteConfirmation) {
+    const response = await fetch(`api/comment/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (data.success) {
+      return window.location.replace("/dashboard");
+    }
+  }
+};
+
 loginForm.on("submit", handleLogin);
 signupForm.on("submit", handleSignUp);
 logOutBtn.on("click", handleLogout);
@@ -286,3 +311,4 @@ deleteBlog.on("click", handleDeleteBlog);
 createBlog.on("submit", handleCreateBlogPost);
 editBlog.on("submit", handleEditBlogPost);
 commentForm.on("submit", handleCommentSubmission);
+deleteAComment.on("click", handleDeleteCommentById);

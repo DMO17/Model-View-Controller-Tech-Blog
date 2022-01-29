@@ -88,9 +88,10 @@ const deleteAComment = async (req, res) => {
   const errorMessage = "Failed to delete comment";
 
   try {
+    const { commentId } = req.params;
     const data = await Comment.destroy({
       where: {
-        id: id,
+        id: commentId,
       },
     });
 
@@ -104,43 +105,12 @@ const deleteAComment = async (req, res) => {
       });
     }
 
-    return res.json({ success: true, data: "Deleted Blog" });
+    return res.json({ success: true, data: "Deleted comment" });
   } catch (error) {
     console.log(`[ERROR]: ${errorMessage} | ${error.message}`);
     return res.status(500).json({
       success: false,
       message: errorMessage,
-    });
-  }
-};
-
-const deleteACommentss = async (req, res) => {
-  try {
-    // check if blog exists
-    const { id, uuid } = req.params;
-    const data = await Blog.findOne({ where: { blog_uuid: uuid } });
-    const blog = checkBlogExists(data, uuid, res);
-
-    // true create a comment
-    if (blog) {
-      const data = await Comment.destroy({
-        where: {
-          comment: id,
-        },
-      });
-      if (!data) {
-        return res.status(404).json({ message: "No Blog with this id exists" });
-      }
-
-      return res.json({
-        success: true,
-        data: `Deleted your comment from blog with id ${uuid}`,
-      });
-    }
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      error: `Failed to retrieve response => ${error.message}`,
     });
   }
 };
