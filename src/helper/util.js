@@ -25,6 +25,4 @@ const checkValidFields = (validFields, res, num) => {
 
 module.exports = {
   getPayloadWithValidFieldsOnly,
-  checkBlogExists,
-  checkValidFields,
 };

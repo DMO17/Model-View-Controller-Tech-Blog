@@ -17,6 +17,7 @@ const renderDashboard = async (req, res) => {
       loggedIn,
       blogs: blogs.map((blog) => blog.get({ plain: true })),
       comments: comments.map((comment) => comment.get({ plain: true })),
+      name: req.session.user.full_name,
     };
 
     res.render("dashboard", data);

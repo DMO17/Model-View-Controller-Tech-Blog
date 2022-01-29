@@ -83,6 +83,51 @@ const blogData = [
       "https://techcrunch.com/wp-content/uploads/2022/01/GettyImages-1315307824.jpeg?w=1390&crop=1",
     user_id: 2,
   },
+  {
+    title: `This Week in Apps: iPhone payments, App Store upgrades, Snapchats AR shopping
+    Sarah Perez  `,
+    content: `Welcome back to This Week in Apps, the weekly TechCrunch series that recaps the latest in mobile OS news, mobile applications and the overall app economy.
+
+    The app industry continues to grow, with a record number of downloads and consumer spending across both the iOS and Google Play stores combined in 2021, according to the latest year-end reports. App Annie says global spending across iOS, Google Play and third-party Android app stores in China grew 19% in 2021 to reach $170 billion. Downloads of apps also grew by 5% reaching 230 billion in 2021 and mobile ad spend grew 23% year-over-year to reach $295 billion.
+    
+    In addition, consumers are spending more time in apps than ever before — even topping the time they spend watching TV, in some cases. The average American watches 3.1 hours of TV per day, for example, but in 2021, they spent 4.1 hours on their mobile device. And they’re not even the world’s heaviest mobile users. In markets like Brazil, Indonesia and South Korea, users surpassed five hours per day in mobile apps in 2021.
+    
+    
+    Apps aren’t just a way to pass idle hours, either. They can grow to become huge businesses. In 2021, 233 apps and games generated more than $100 million in consumer spend, and 13 topped $1 billion in revenue, App Annie noted. This was up 20% from 2020, when 193 apps and games topped $100 million in annual consumer spend, and just eight apps topped $1 billion.
+    
+    This Week in Apps offers a way to keep up with this fast-moving industry in one place with the latest from the world of apps, including news, updates, startup fundings, mergers and acquisitions, and suggestions about new apps and games to try, too.`,
+    blog_img:
+      "https://ic-cdn.flipboard.com/techcrunch.com/eb21a0d43ef822b332c19a87a674fea63dfd40ee/_medium.webp",
+    user_id: 4,
+  },
+  {
+    title: `Frozen giants, and why everyone is competing with everyone regardless of what they say`,
+    content: `While the venture capital world loses its mind over crypto-based video games bringing fiscally focused activity to the “gaming” space, some builders are sticking to more traditional models.
+
+
+    One such company is Frost Giant, which announced a Series A this week worth $25 million, and is building a de novo RTS game. As a longtime fan of the genre, I am incredibly excited about this. As a business and technology journalist, I am curious as well.
+    
+    I got on the phone the other day with its founders – the Two Tims – to chat through what they are building. Details are somewhat sparse at the moment because the company is still a ways from releasing its title. But! It will be a real-time strategy (RTS) game, a genre made famous by beloved entries like Age of Empires and Starcraft. It should feature, we learned, a campaign and multiplayer capabilities. And the group is talking to esports players as well so that it works out of the box for more competitive battles.
+    
+    Per the company, it’s being built to be a game as a service of sorts, with a long shelf life. That’s a big goal. And to do so with new IP as the core is a big gamble. In a good way, I think; this is what venture capital is for – venturing into the unknown. Not just building more B2B SaaS.
+    
+    For now, Frost Giant is staying mum on setting and anything more substantial about the game’s core elements, so we’ll be keeping an eye on what it’s building.`,
+    blog_img:
+      "https://techcrunch.com/wp-content/uploads/2020/06/NSussman_Techcrunch_Exchange-multicolor.jpg?w=730&crop=1",
+    user_id: 4,
+  },
+  {
+    title: `Daily Crunch: Google will offer G Suite legacy edition users a ‘no-cost option’`,
+    content: `Google invests up to $1B in Airtel: With a $700 million investment and $300 million in “multi-year commercial agreements” with Airtel, and Indian telco, Google has made its second major bet on Indian infra. Recall that Google also put money into Jio, another Indian telco. The deal underscores the importance of the country in the future of technology revenues.
+    What’s ahead for Europe: On the heels of news that European startups had an outsized 2021 when it came to fundraising, TechCrunch explored what’s ahead for the continent. Some expect a slowdown from peak activity, while others anticipate further acceleration. Regardless of which perspective you favor, European venture investment is expected to remain elevated for some time to come.
+    Zapp raises $200M: And speaking of European startups, Zapp, the U.K.-based quick-convenience delivery startup, just raised a massive Series B. The company previously raised $100 million, meaning that this round was big in absolute and comparative terms. As we see some consolidation in the fast-delivery space, this deal caught our eye. 
+    Are charter cities the future for African tech growth? TechCrunch’s Tage Kene-Okafor has a great piece up on the site noting that “African cities have the fastest global urban growth rate,” which is leading to overcrowding. Some folks think that “charter cities offer a solution.” Special economic zones of all types have been tried before – will they offer African tech a faster route forward?
+Personalized learning is hot: Our in-house edtech expert Natasah Mascarenhas has a great piece out today on personalized learning startups – Learnfully, Wayfinder, Empowerly, and others – that are taking the lessons of remote schooling to heart and working to make products that work better for our kids. It’s an encouraging, fascinating story.
+Rise wants to remake team calendaring: There is no shortage of apps in the market to help individuals and teams work together. But we might not need as many as we have. That’s why Rise is making me think. The team calendaring app just raised a few million, and could replace a few tools that myself and friends use. I wonder if the solution to the Tool Overload of 2022 is tools that do less, intentionally.`,
+    blog_img:
+      "https://techcrunch.com/wp-content/uploads/2019/04/GettyImages-881497250.jpg?w=730&crop=1",
+    user_id: 4,
+  },
 ];
 
 const seedBlogs = () => Blog.bulkCreate(blogData);
