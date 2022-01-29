@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // set session db
 const sessionOptions = {
-  secret: process.env.SESSION_SECRET,
+  secret: "Super secret secret",
   cookie: {
     // Stored in milliseconds (86400 === 1 day)
     maxAge: 86400000,
