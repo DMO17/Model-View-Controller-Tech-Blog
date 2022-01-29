@@ -40,8 +40,6 @@ const updateBlog = async (req, res) => {
   try {
     const { uuid } = req.params;
 
-    console.log(uuid);
-
     const validFields = getPayloadWithValidFieldsOnly(
       ["title", "content", "blog_img"],
       req.body

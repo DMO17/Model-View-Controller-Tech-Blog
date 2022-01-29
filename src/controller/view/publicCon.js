@@ -16,11 +16,11 @@ const renderHomePage = async (req, res) => {
       raw: true,
     });
 
-    // const data = blogData.map((each) => each.get({ plain: true }));
-
     res.render("home", { data, loggedIn });
   } catch (error) {
-    console.log(error.message);
+    console.log(
+      `[ERROR] : Not able to render the home page | ${error.message}`
+    );
   }
 };
 

@@ -1,31 +1,39 @@
 const { Blog, User, Comment } = require("../../models");
 
 const renderDashboard = async (req, res) => {
-  const { loggedIn } = req.session;
+  try {
+    const { loggedIn } = req.session;
 
-  const blogs = await Blog.findAll({
-    where: { user_id: req.session.user.id },
-    include: [{ model: User, as: "user" }],
-  });
+    const blogs = await Blog.findAll({
+      where: { user_id: req.session.user.id },
+      include: [{ model: User, as: "user" }],
+    });
 
-  const comments = await Comment.findAll({
-    where: { user_id: req.session.user.id },
-  });
+    const comments = await Comment.findAll({
+      where: { user_id: req.session.user.id },
+    });
 
-  const data = {
-    loggedIn,
-    blogs: blogs.map((blog) => blog.get({ plain: true })),
-    comments: comments.map((comment) => comment.get({ plain: true })),
-  };
+    const data = {
+      loggedIn,
+      blogs: blogs.map((blog) => blog.get({ plain: true })),
+      comments: comments.map((comment) => comment.get({ plain: true })),
+    };
 
-  console.log(data.comments);
-
-  res.render("dashboard", data);
+    res.render("dashboard", data);
+  } catch (error) {
+    console.log(
+      `[ERROR] : Not able to render the dashboard data | ${error.message}`
+    );
+  }
 };
 
 const renderBlogForm = (req, res) => {
-  const { loggedIn } = req.session;
-  res.render("blog-form", { loggedIn });
+  try {
+    const { loggedIn } = req.session;
+    res.render("blog-form", { loggedIn });
+  } catch (error) {
+    console.log(`[ERROR] : Not able to render blog form | ${error.message}`);
+  }
 };
 
 const renderEditBlogForm = async (req, res) => {
@@ -37,8 +45,11 @@ const renderEditBlogForm = async (req, res) => {
     const blogData = await Blog.findOne({
       where: { blog_uuid: blogId },
       include: [{ model: User }],
-      // raw: true,
     });
+
+    if (!blogData) {
+      return res.render("no-blog");
+    }
 
     const serializedData = blogData.get({ plain: true });
 
@@ -49,11 +60,11 @@ const renderEditBlogForm = async (req, res) => {
 
     const data = { loggedIn, ...handlebarsBlogEditData };
 
-    console.log(data);
-
     return res.render("edit-blog", data);
   } catch (error) {
-    console.log(error.message);
+    console.log(
+      `[ERROR] : Not able to render the Edit blog form  | ${error.message}`
+    );
   }
 };
 
@@ -77,11 +88,6 @@ const renderBlog = async (req, res) => {
       return res.render("no-blog");
     }
 
-    // const serializedData = { blogInfo: blogData.get({ plain: true }) };
-
-    // const data = { loggedIn, ...handlebarsBlogData };
-    // console.log(handlebarsBlogData.serializedData.comments);
-
     const blogComments = blogData
       .get({ plain: true })
       .comments.map((comment) => {
@@ -96,11 +102,11 @@ const renderBlog = async (req, res) => {
       blogComments,
     };
 
-    console.log(data);
-
     return res.render("blog", data);
   } catch (error) {
-    console.log(error.message);
+    console.log(
+      `[ERROR] : Not able to render the the blog page | ${error.message}`
+    );
   }
 };
 
