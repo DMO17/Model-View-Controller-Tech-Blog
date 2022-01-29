@@ -18,67 +18,67 @@ const handleSignUp = async (event) => {
   const confirmPassword = $("#confirm-password").val();
   const alertMessage = $("#alert-message");
 
-  console.log(password, confirmPassword);
+  if (
+    first_name &&
+    last_name &&
+    email &&
+    username &&
+    password &&
+    confirmPassword
+  ) {
+    if (password === confirmPassword && password.length > 8) {
+      const response = await fetch("/auth/signup", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          first_name,
+          last_name,
+        }),
+        redirect: "follow",
+      });
 
-  if (password === confirmPassword && password.length > 8) {
-    const response = await fetch("/auth/signup", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        first_name,
-        last_name,
-      }),
-      redirect: "follow",
-    });
+      const data = await response.json();
 
-    const data = await response.json();
+      if (data.success) {
+        window.location.replace("/login");
+      } else {
+        const warning = `<div class="alert alert-success" role="alert">
+         The email or username already has an account
+        </div>`;
+        alertMessage.empty();
 
-    if (data.success) {
-      window.location.replace("/login");
-    } else {
+        alertMessage.append(warning);
+      }
+    }
+
+    if (password === confirmPassword && password.length < 8) {
       const warning = `<div class="alert alert-success" role="alert">
-       The email or username already has an account
+       Your password must be have over 8 characters
       </div>`;
+      alertMessage.empty();
+      alertMessage.append(warning);
+    }
+    if (password != confirmPassword) {
+      const warning = `<div class="alert alert-success" role="alert">
+      Your confirm password does'nt match
+    </div>`;
+
       alertMessage.empty();
 
       alertMessage.append(warning);
     }
-  }
-  if (
-    !first_name ||
-    !last_name ||
-    !email ||
-    !username ||
-    !password ||
-    !confirmPassword
-  ) {
+  } else {
     const warning = `<div class="alert alert-success" role="alert">
-    Please Fill out the required fields to sign-up
-  </div>`;
+  Please Fill out the required fields to sign-up
+</div>`;
 
     alertMessage.empty();
-    alertMessage.append(warning);
-  }
-  if (password === confirmPassword && password.length < 8) {
-    const warning = `<div class="alert alert-success" role="alert">
-     Your password must be have over 8 characters
-    </div>`;
-    alertMessage.empty();
-    alertMessage.append(warning);
-  }
-  if (password != confirmPassword && password.length > 8) {
-    const warning = `<div class="alert alert-success" role="alert">
-    Your confirm password does'nt match
-  </div>`;
-
-    alertMessage.empty();
-
     alertMessage.append(warning);
   }
 };

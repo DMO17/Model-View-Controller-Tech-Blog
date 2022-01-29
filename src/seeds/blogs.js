@@ -84,8 +84,7 @@ const blogData = [
     user_id: 2,
   },
   {
-    title: `This Week in Apps: iPhone payments, App Store upgrades, Snapchats AR shopping
-    Sarah Perez  `,
+    title: `iPhone payments, App Store upgrades, Snapchat AR shopping Sarah Perez  `,
     content: `Welcome back to This Week in Apps, the weekly TechCrunch series that recaps the latest in mobile OS news, mobile applications and the overall app economy.
 
     The app industry continues to grow, with a record number of downloads and consumer spending across both the iOS and Google Play stores combined in 2021, according to the latest year-end reports. App Annie says global spending across iOS, Google Play and third-party Android app stores in China grew 19% in 2021 to reach $170 billion. Downloads of apps also grew by 5% reaching 230 billion in 2021 and mobile ad spend grew 23% year-over-year to reach $295 billion.
