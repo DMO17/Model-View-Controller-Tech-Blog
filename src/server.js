@@ -1,4 +1,5 @@
 // npm packages imports
+require("dotenv").config();
 const express = require("express");
 const expressHandleBars = require("express-handlebars");
 const path = require("path");
@@ -17,7 +18,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // set session db
 const sessionOptions = {
-  secret: "Super secret secret", // env,
+  secret: process.env.SESSION_SECRET,
   cookie: {
     // Stored in milliseconds (86400 === 1 day)
     maxAge: 86400000,
