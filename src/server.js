@@ -10,7 +10,7 @@ const hbsHelpers = require("./helper/hbs-helpers");
 const connection = require("./config/connection");
 const routes = require("./routes");
 
-const PORT = 5001;
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 //static middleware
