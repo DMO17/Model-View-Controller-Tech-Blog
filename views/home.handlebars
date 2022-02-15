@@ -1,0 +1,97 @@
+<header>
+  {{#if loggedIn}}
+  {{> private-navbar}}
+  {{else}}
+  {{> public-navbar}}
+  {{/if}}
+</header>
+
+
+<section
+      class="py-5 bg-image-full"
+      style="background-image: url('https://everything-pr.com/wp-content/uploads/2016/04/PR-Journalism.jpg')"
+    >
+      <div class="text-center my-5">
+        <img
+          class="img-fluid rounded-circle mb-4"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-Ekub0Yux_QzgS2a18xUprObWurrs7MKU6RhUnnvWjeHcKBzpT8pvtC-HQc6pYN9Iiac&usqp=CAU"
+          alt="..."
+        />
+        <h1 class="text-white fs-3 fw-bolder">TECH BLOG</h1>
+      </div>
+  </section>
+
+ <div class="container grid ">
+
+{{#each data}}
+
+{{#index id}}
+ 
+ <div class="item project blog-card">
+   <a class="link-style" href="/blog/view/{{blog_uuid}}">
+    <div class="content">
+      <div class="desc">
+        <div class="display-6 mb-1">{{title}}</div>
+
+        <img src="{{blog_img}}" />
+
+        <p >
+        {{reduceContentLength1 content}} ...
+        </p>
+      </div>
+        <div class="font-italic text-end h5"><u>{{'user.username'}}</u></div>
+
+    </div>
+     </a>
+  </div>
+ 
+{{else}} 
+
+  <div class="item photo blog-card">
+ <a class="link-style" href="/blog/view/{{blog_uuid}}">
+    <div class="content">
+      <img class="photothumb" src="{{blog_img}}" />
+
+      <div class="display-6 mb-1">{{title}}</div>
+
+      <div class="desc">
+        <p>
+         {{reduceContentLength2 content}} ... 
+        </p>
+      </div>
+      <div class="font-italic text-end h5"><u> {{'user.username'}}</u></div>
+    </div>
+     </a>
+  </div> 
+
+ {{/index}}
+
+{{/each}}
+
+</div> 
+
+
+
+
+
+
+
+
+<script>
+  function resizeGridItem(item) { grid =
+  document.getElementsByClassName("grid")[0]; rowHeight = parseInt(
+  window.getComputedStyle(grid).getPropertyValue("grid-auto-rows") ); rowGap =
+  parseInt( window.getComputedStyle(grid).getPropertyValue("grid-row-gap") );
+  rowSpan = Math.ceil(
+  (item.querySelector(".content").getBoundingClientRect().height + rowGap) /
+  (rowHeight + rowGap) ); item.style.gridRowEnd = "span " + rowSpan; } function
+  resizeAllGridItems() { allItems = document.getElementsByClassName("item"); for
+  (x = 0; x < allItems.length; x++) { resizeGridItem(allItems[x]); } } function
+  resizeInstance(instance) { item = instance.elements[0]; resizeGridItem(item);
+  } window.onload = resizeAllGridItems(); window.addEventListener("resize",
+  resizeAllGridItems); allItems = document.getElementsByClassName("item"); for
+  (x = 0; x < allItems.length; x++) { imagesLoaded(allItems[x], resizeInstance);
+  }
+
+</script>
+

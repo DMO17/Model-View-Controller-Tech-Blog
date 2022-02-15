@@ -1,0 +1,41 @@
+<header>
+  {{> private-navbar}}
+</header>
+
+<main class="bg-img">
+<h1 class="text-center text-light">BLOG FORM</h1>
+
+<div class="container create-blog form-bg">
+  <div class="container banner mt-4">
+    <h3 class="text-center">Post Your Blog</h3>
+  </div>
+
+  <div id="alert-message"></div>
+
+  <form action="" class="mt-4">
+
+    <div class="inputContainer">
+      <input id="blog-title" type="text" class="input" placeholder="a" />
+      <label for="" class="label">Blog Title</label>
+    </div>
+
+    <div class="inputContainer">
+      <input id="blog-img" type="text" class="input" placeholder="a" />
+      <label for="" class="label">Blog Image URL</label>
+    </div>
+
+    <div class="inputContainer2">
+      <textarea
+        cols="30"
+        rows="50"
+        type="text"
+        class="input"
+        id="blog-content"
+        placeholder="a"
+      ></textarea>
+      <label for="blog-content" class="label">Write your blog</label>
+    </div>
+    <input type="submit" class="submitBtn" value="Post" />
+  </form>
+</div>
+</main>

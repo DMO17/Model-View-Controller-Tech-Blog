@@ -1,0 +1,51 @@
+
+<header>
+  {{> private-navbar}}
+</header>
+
+
+  {{#if myBlogEdit}}
+ <main class="bg-img">
+<h1 class="text-center text-light">Edit blog</h1>
+
+<div class="container edit-blog form-bg">
+  <div class="container banner mt-4">
+    <h3 class="text-center">Edit Your Blog</h3>
+  </div>
+
+  <div id="alert-message"></div>
+
+  <form action="" class="mt-4" id = '{{serializedData.blog_uuid}}'>
+
+    <div class="inputContainer">
+      <input id="edit-title" type="text" class="input" placeholder="a" value = '{{serializedData.title}}' />
+      <label for="" class="label">Blog Title</label>
+    </div>
+
+    <div class="inputContainer">
+      <input id="edit-img" type="text" class="input" placeholder="a"  value = '{{serializedData.blog_img}}' />
+      <label for="" class="label">Blog Image URL</label>
+    </div>
+
+    <div class="inputContainer2">
+      <textarea
+        cols="50"
+        rows="70"
+        type="text"
+        class="input"
+        id="edit-content"
+        placeholder="a"
+
+      > 
+       {{serializedData.content}}
+      </textarea>
+      <label for="edit-content" class="label">Write your blog</label>
+    </div>
+    <input type="submit" class="submitBtn" value="Post" />
+  </form>
+</div>
+
+</main>
+  {{else}}
+  <div class="bg-img display-1 text-center pt-5 text-light">THIS IS NOT YOUR BLOG TO EDIT!! </div>
+  {{/if}}

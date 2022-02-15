@@ -1,0 +1,65 @@
+<header>
+  {{#if loggedIn}}
+  {{> private-navbar}}
+  {{else}}
+  {{> public-navbar}}
+  {{/if}}
+</header>
+
+
+<main class="bg-img">
+  <section class="view-page">
+
+<div class="item photo">
+  <div class="m-5">
+    <div class="content">
+      <div class="title text-center mb-2">{{serializedData.title}}</div>
+
+      <div class="mb-3">  {{serializedData.user.first_name}}      {{serializedData.user.last_name}}     {{serializedData.user.username}}     {{serializedData.user.email}}            {{dateFormatter serializedData.createdAt}}</div>
+
+      <img class="photothumb mb-2" src="{{serializedData.blog_img}}" />
+
+      <div class="desc mt-3">
+        <p class="h4 content-text">{{serializedData.content}}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+ <div class="container d-flex flex-column justify-content-center mt-100 mb-100">
+  <div class="h1 text-center mb-5 mt-o">COMMENT</div>
+  <form class="comment-form" id= {{serializedData.blog_uuid}}> 
+     <div id="alert-message"></div>
+<div class="d-flex flex-wrap flex-row justify-content-center">
+    <div class="inputContainer3">
+      <textarea
+        cols="30"
+        rows="50"
+        type="text"
+        class="input"
+        id="user-comment"
+        placeholder="a"
+      ></textarea>
+      <label for="blog-content" class="label">Post Your Comment</label>
+    </div>
+
+   <div> <input type="submit" class="submitBtn" value="Post" /></div>
+</div>
+  </form>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            {{#each serializedData.comments}}
+          {{> comment-post}}
+          {{/each}}
+          </div>
+        </div>
+      </div>
+</div>
+
+</section>
+
+</main>

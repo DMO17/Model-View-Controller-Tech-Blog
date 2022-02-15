@@ -1,0 +1,73 @@
+
+<header>
+  {{> private-navbar}}
+</header>
+
+<main class="bg-img">
+
+  <div class="display-4 text-warning mb-5"><u>Welcome:{{name}}</u></div>
+
+<h1 class="text-center text-light">Blog Posts</h1>
+
+<div class="d-flex  flex-lg-row flex-sm-column justify-content-between mb-5">
+<div class="container parent ">
+  <div class="blog-container ">
+
+{{#each blogs}}
+
+   <div class="card" style="width: 18rem">
+      <img
+        class="card-img-top"
+        src="{{blog_img}}"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title content-style-1">{{title}}</h5>
+        <p class="card-text content-style-1"> {{content}}  </p>
+        <div class="text-center">
+          <a href="/blog/View/{{blog_uuid}}" class="card-link">View <i class="fas fa-pen"></i></a>
+          <a href="/blog/Edit/{{blog_uuid}}" class="card-link">Edit <i class="fas fa-pen"></i></a>
+          <a href="#" class="card-link delete-btn" id="{{blog_uuid}}">Delete <i class="fas fa-trash"></i></a>
+        </div>
+      </div>
+    </div>
+
+{{/each}}
+
+  </div>
+</div>
+</div>
+
+
+<h1 class="text-center text-light">Comment Posts</h1>
+
+<div class="container parent d-flex  flex-row flex-wrap mb-5">
+  {{#each comments}}
+    <div class="comment-container">
+      <div class="card mb-2">
+        <div class=" mb-0">
+          <div class="h3 text-center">Blog title</div>
+        <div class="mb-3 card-body text-center"> {{comment}} </div>
+         <p class="text-center">{{dateFormatter createdAt}}</p>
+        </div>
+        <div class="text-center">
+          <a href="#" class="card-link">Edit <i class="fas fa-pen"></i></a>
+          <a href="#" class="card-link delete-comment" id="{{id}}" >Delete <i class="fas fa-trash"></i></a>
+        </div>
+      </div>
+</div> 
+ {{/each}}
+</div>
+
+
+</main>
+
+
+
+
+
+
+
+
+
+
